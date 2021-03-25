@@ -30,7 +30,7 @@ def pingPong(pixels, num_pixels, speed, color=(255,0,0)):
             pixels[i] = color
             pixels[i+1] = (0,0,0)
         pixels.show()
-        time.sleep(stepInterval)
+        time.sleep(actualSleepInterval)
 
 def wheel(pos):
     # Input a value 0 to 255 to get a color value.
