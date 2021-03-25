@@ -20,4 +20,4 @@ BLUE = (0, 0, 255)
 while True:
     # countdown(pixels, 3)
     # pingPong(pixels, num_pixels, 3, YELLOW)
-    chasingLights(pixels, num_pixels, 7, BLUE, 10)
+    chasingLights(pixels, num_pixels, 20, BLUE, 10)
