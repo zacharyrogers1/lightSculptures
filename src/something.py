@@ -2,7 +2,7 @@
 import time
 import board
 import neopixel
-from countdown import countdown
+from lightAnimations import *
  
 pixel_pin = board.D18
 num_pixels = 50
@@ -50,4 +50,5 @@ BLUE = (0, 0, 255)
 PURPLE = (180, 0, 255)
  
 while True:
-    countdown(pixels, 10)
+    countdown(pixels, 3)
+    pingPong(pixels, num_pixels, 3, YELLOW)
