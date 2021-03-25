@@ -12,7 +12,7 @@ def countdown(pixels, timeInSeconds):
 def pingPong(pixels, num_pixels, speed, color=(255,0,0)):
     maxSleepInterval = 0.5
 
-    actualSleepInterval = maxSleepInterval * speed
+    actualSleepInterval = getNormalizedSpeed(speed, maxSleepInterval)
     pixels.fill((0,0,0))
     pixels.show()
     for i in range(num_pixels):
@@ -32,6 +32,14 @@ def pingPong(pixels, num_pixels, speed, color=(255,0,0)):
         pixels.show()
         time.sleep(actualSleepInterval)
 
+def getNormalizedSpeed(speed, maxSleepInterval):
+    if(speed > 1.0):
+        return 1.0 * maxSleepInterval
+    elif(speed < 0):
+        return 0 
+    return speed * maxSleepInterval
+
+
 def wheel(pos):
     # Input a value 0 to 255 to get a color value.
     # The colours are a transition r - g - b - back to r.
@@ -45,12 +53,14 @@ def wheel(pos):
     pos -= 170
     return (pos * 3, 0, 255 - pos * 3)
 
-def unifiedRainbow(pixels, timeInSeconds):
-    stepInterval = timeInSeconds / 255
+def unifiedRainbow(pixels, speed):
+    maxSleepInterval = 0.25
+
+    actualSleepInterval = getNormalizedSpeed(speed, maxSleepInterval)
     for i in range(255):
         pixels.fill(wheel(i))
         pixels.show()
-        time.sleep(stepInterval)
+        time.sleep(actualSleepInterval)
 
 def scaleBrightnessOfColor(color, percentage):
     return tuple([percentage*x for x in color])
