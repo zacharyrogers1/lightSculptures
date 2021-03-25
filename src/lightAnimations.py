@@ -56,10 +56,13 @@ def chasingLights(pixels, num_pixels, numLitPixels, color, timeInSeconds):
         else:
             return numLitPixels
 
+    pixels.fill((0,0,0))
     stepInterval = timeInSeconds / num_pixels
     for currentPixel in range(num_pixels):
         numTrailingPixels = determineNumberTrailingPixels(currentPixel, numLitPixels)
         for LitPixel in range(numTrailingPixels):
             thePercentage = (numLitPixels - LitPixel) / numLitPixels
             scaledBrightnessValue = scaleBrightnessOfColor(color, thePercentage)
+            print("Current Pixel: ", currentPixel, " Number Trailing Pixels: ", numTrailingPixels, " Percentage: ", thePercentage, "scaledBrightness: ", scaledBrightnessValue)
             pixels[currentPixel-LitPixel] = scaledBrightnessValue
+            time.sleep(stepInterval)
