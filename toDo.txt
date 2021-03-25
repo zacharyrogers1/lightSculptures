@@ -1,0 +1,6 @@
+1. Get working with AWS
+2. Get pyenv and pipenv to work correctly on MAC and Raspberry Pi for AWS sdk work.
+3. Hookup Frontend to send IoT commands and change state. 
+
+2D Grid
+1. Work on 2D grid implementation
