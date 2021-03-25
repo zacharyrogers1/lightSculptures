@@ -65,7 +65,7 @@ def unifiedRainbow(pixels, speed):
 def scaleBrightnessOfColor(color, percentage):
     return tuple([percentage*x for x in color])
 
-def chasingLights(pixels, num_pixels, numLitPixels, color, timeInSeconds):
+def chasingLights(pixels, num_pixels, numLitPixels, color, speed):
 
     def determineNumberTrailingPixels(currentPixel, numLitPixels):
         if(currentPixel < numLitPixels):
@@ -73,9 +73,11 @@ def chasingLights(pixels, num_pixels, numLitPixels, color, timeInSeconds):
         else:
             return numLitPixels
 
+    
+    maxSleepInterval = 0.3
+    actualSleepInterval = getNormalizedSpeed(speed,maxSleepInterval)
     pixels.fill((0,0,0))
     pixels.show()
-    stepInterval = timeInSeconds / num_pixels
     for currentPixel in range(num_pixels):
         numTrailingPixels = determineNumberTrailingPixels(currentPixel, numLitPixels)
         for LitPixel in range(numTrailingPixels + 1):
@@ -83,3 +85,4 @@ def chasingLights(pixels, num_pixels, numLitPixels, color, timeInSeconds):
             scaledBrightnessValue = scaleBrightnessOfColor(color, thePercentage)
             pixels[currentPixel-LitPixel] = scaledBrightnessValue
         pixels.show()
+        time.sleep(actualSleepInterval)
