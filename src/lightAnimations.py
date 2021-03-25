@@ -6,6 +6,7 @@ def countdown(pixels, timeInSeconds):
         greenValue = 255 - i
         redValue = i
         pixels.fill((greenValue,redValue, 0))
+        pixels.show()
         time.sleep(stepInterval)
 
 def pingPong(pixels, num_pixels, timeInSeconds, color=(255,0,0)):
