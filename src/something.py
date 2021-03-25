@@ -22,4 +22,4 @@ PURPLE = (180, 0, 255)
 while True:
     # countdown(pixels, 3)
     # pingPong(pixels, num_pixels, 3, YELLOW)
-    unifiedRainbow(pixels, 3)
+    chasingLights(pixels, num_pixels, 7, PURPLE, 10)

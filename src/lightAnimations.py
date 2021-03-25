@@ -44,3 +44,22 @@ def unifiedRainbow(pixels, timeInSeconds):
     for i in range(255):
         pixels.fill(wheel(i))
         time.sleep(stepInterval)
+
+def scaleBrightnessOfColor(color, percentage):
+    return tuple([percentage*x for x in color])
+
+def chasingLights(pixels, num_pixels, numLitPixels, color, timeInSeconds):
+
+    def determineNumberTrailingPixels(currentPixel, numLitPixels):
+        if(currentPixel =< numLitPixels):
+            return currentPixel
+        else
+            return numLitPixels
+
+    stepInterval = timeInSeconds / num_pixels
+    for currentPixel in range(num_pixels):
+        numTrailingPixels = determineNumberTrailingPixels(currentPixel, numLitPixels)
+        for LitPixel in range(numTrailingPixels):
+            thePercentage = (numLitPixels - LitPixel) / numLitPixels
+            scaledBrightnessValue = scaleBrightnessOfColor(color, thePercentage)
+            pixels[currentPixel-LitPixel] = scaledBrightnessValue
