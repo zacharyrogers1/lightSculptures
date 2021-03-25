@@ -40,7 +40,7 @@ def wheel(pos):
     return (pos * 3, 0, 255 - pos * 3)
 
 def unifiedRainbow(pixels, timeInSeconds):
-    stepInterval = 255 / timeInSeconds
+    stepInterval = timeInSeconds / 255
     for i in range(255):
         pixels.fill(wheel(i))
         time.sleep(stepInterval)
