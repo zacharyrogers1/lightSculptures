@@ -20,6 +20,6 @@ BLUE = (0, 0, 255)
 PURPLE = (180, 0, 255)
  
 while True:
-    countdown(pixels, 3)
-    pingPong(pixels, num_pixels, 3, YELLOW)
+    # countdown(pixels, 3)
+    # pingPong(pixels, num_pixels, 3, YELLOW)
     unifiedRainbow(pixels, 3)
