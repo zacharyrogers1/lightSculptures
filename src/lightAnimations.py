@@ -53,7 +53,7 @@ def chasingLights(pixels, num_pixels, numLitPixels, color, timeInSeconds):
     def determineNumberTrailingPixels(currentPixel, numLitPixels):
         if(currentPixel < numLitPixels):
             return currentPixel
-        else
+        else:
             return numLitPixels
 
     stepInterval = timeInSeconds / num_pixels
