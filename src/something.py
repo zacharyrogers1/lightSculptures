@@ -12,14 +12,12 @@ pixels = neopixel.NeoPixel(pixel_pin, num_pixels, auto_write=True, pixel_order=O
 #  Green->Red->Blue
  
  
-RED = (255, 0, 0)
-YELLOW = (255, 150, 0)
-GREEN = (0, 255, 0)
-CYAN = (0, 255, 255)
+RED = (0, 255, 0)
+GREEN = (255, 0, 0)
 BLUE = (0, 0, 255)
-PURPLE = (180, 0, 255)
+
  
 while True:
     # countdown(pixels, 3)
     # pingPong(pixels, num_pixels, 3, YELLOW)
-    chasingLights(pixels, num_pixels, 7, PURPLE, 10)
+    chasingLights(pixels, num_pixels, 7, BLUE, 10)
