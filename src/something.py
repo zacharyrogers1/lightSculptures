@@ -18,7 +18,8 @@ WHITE = (255,255,255)
 
  
 while True:
-    countdown(pixels, 3)
-    pingPong(pixels, num_pixels, 3, RED)
-    chasingLights(pixels, num_pixels, 20, WHITE, 3)
-    unifiedRainbow(pixels, 3)
+    # countdown(pixels, 3)
+    pingPong(pixels, num_pixels, 0, RED)
+    pingPong(pixels, num_pixels, 1, RED)
+    # chasingLights(pixels, num_pixels, 20, WHITE, 3)
+    # unifiedRainbow(pixels, 3)

@@ -9,8 +9,10 @@ def countdown(pixels, timeInSeconds):
         pixels.show()
         time.sleep(stepInterval)
 
-def pingPong(pixels, num_pixels, timeInSeconds, color=(255,0,0)):
-    stepInterval = timeInSeconds / (num_pixels * 2)
+def pingPong(pixels, num_pixels, speed, color=(255,0,0)):
+    maxSleepInterval = 0.5
+
+    actualSleepInterval = maxSleepInterval * speed
     pixels.fill((0,0,0))
     pixels.show()
     for i in range(num_pixels):
