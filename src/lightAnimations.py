@@ -51,7 +51,7 @@ def scaleBrightnessOfColor(color, percentage):
 def chasingLights(pixels, num_pixels, numLitPixels, color, timeInSeconds):
 
     def determineNumberTrailingPixels(currentPixel, numLitPixels):
-        if(currentPixel =< numLitPixels):
+        if(currentPixel < numLitPixels):
             return currentPixel
         else
             return numLitPixels
