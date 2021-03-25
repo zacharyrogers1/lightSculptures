@@ -12,12 +12,14 @@ def countdown(pixels, timeInSeconds):
 def pingPong(pixels, num_pixels, timeInSeconds, color=(255,0,0)):
     stepInterval = timeInSeconds / (num_pixels * 2)
     pixels.fill((0,0,0))
+    pixels.show()
     for i in range(num_pixels):
         if(i == 0):
             pixels[i] = color
         else:
             pixels[i] = color
             pixels[i-1] = (0,0,0)
+        pixels.show()
         time.sleep(stepInterval)
     for i in range(num_pixels-1, -1, -1):
         if(i == num_pixels-1):
@@ -25,6 +27,7 @@ def pingPong(pixels, num_pixels, timeInSeconds, color=(255,0,0)):
         else:
             pixels[i] = color
             pixels[i+1] = (0,0,0)
+        pixels.show()
         time.sleep(stepInterval)
 
 def wheel(pos):
@@ -44,6 +47,7 @@ def unifiedRainbow(pixels, timeInSeconds):
     stepInterval = timeInSeconds / 255
     for i in range(255):
         pixels.fill(wheel(i))
+        pixels.show()
         time.sleep(stepInterval)
 
 def scaleBrightnessOfColor(color, percentage):
