@@ -19,7 +19,7 @@ def pingPong(pixels, num_pixels, timeInSeconds, color=(255,0,0)):
             pixels[i-1] = (0,0,0)
         time.sleep(stepInterval)
     for i in range(num_pixels-1, -1, -1):
-        if(i == num_pixels):
+        if(i == num_pixels-1):
             pixels[i] = color
         else:
             pixels[i] = color
