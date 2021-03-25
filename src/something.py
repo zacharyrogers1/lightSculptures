@@ -25,6 +25,6 @@ while True:
     # unifiedRainbow(pixels, 0)
     # unifiedRainbow(pixels, 0.33)
     chasingLights(pixels, num_pixels, 20, WHITE, 0)
-    chasingLights(pixels, num_pixels, 20, BLUE, 0.1)
-    chasingLights(pixels, num_pixels, 20, GREEN, 1.0)
+    # chasingLights(pixels, num_pixels, 20, BLUE, 0.1)
+    # chasingLights(pixels, num_pixels, 20, GREEN, 1.0)
     # unifiedRainbow(pixels, 3)
