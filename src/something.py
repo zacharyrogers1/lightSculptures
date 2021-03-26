@@ -23,7 +23,7 @@ while True:
     # pingPong(pixels, num_pixels, 0.5, RED)
     # pingPong(pixels, num_pixels, 0.25, RED)
     # unifiedRainbow(pixels, 0)
-    unifiedRainbow(pixels)
+    unifiedRainbow(pixels, 0.2)
     chasingLights(pixels, num_pixels, 20, WHITE, 0)
     # chasingLights(pixels, num_pixels, 20, BLUE, 0.1)
     # chasingLights(pixels, num_pixels, 20, GREEN, 1.0)

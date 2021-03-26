@@ -7,7 +7,6 @@ name = "pypi"
 adafruit-blinka = "*"
 adafruit-circuitpython-neopixel = "*"
 pip = "*"
-# It looks as if rpi_ws281x cannot be installed on a MAC but is a requirement for the Raspberry Pi. must install separate
 install = "*"
 awsiotpythonsdk = "*"
 
@@ -15,3 +14,5 @@ awsiotpythonsdk = "*"
 
 [requires]
 python_version = "3.7"
+
+#Going to use pipfile to track the dependencies however virtual pipenv on raspberry pi is too slow to use.
