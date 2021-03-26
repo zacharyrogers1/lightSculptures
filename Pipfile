@@ -1,0 +1,17 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+adafruit-blinka = "*"
+adafruit-circuitpython-neopixel = "*"
+pip = "*"
+# It looks as if rpi_ws281x cannot be installed on a MAC but is a requirement for the Raspberry Pi. must install separate
+install = "*"
+awsiotpythonsdk = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.7"

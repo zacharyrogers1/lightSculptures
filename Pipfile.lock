@@ -1,0 +1,92 @@
+{
+    "_meta": {
+        "hash": {
+            "sha256": "c91af456eb2245754b70fd795f0bbb832567c6af8679256458c72430cc80453d"
+        },
+        "pipfile-spec": 6,
+        "requires": {
+            "python_version": "3.7"
+        },
+        "sources": [
+            {
+                "name": "pypi",
+                "url": "https://pypi.org/simple",
+                "verify_ssl": true
+            }
+        ]
+    },
+    "default": {
+        "adafruit-blinka": {
+            "hashes": [
+                "sha256:0c1af9cd4c4851dd2fbffb0024cf0a359c4e8320940e5c1cd3d47099ce6a12fd"
+            ],
+            "index": "pypi",
+            "version": "==6.4.1"
+        },
+        "adafruit-circuitpython-neopixel": {
+            "hashes": [
+                "sha256:b49e244cd5dcdec50c466b547f8394068ca46d4854e96db1e9645700b7207bf9"
+            ],
+            "index": "pypi",
+            "version": "==6.0.2"
+        },
+        "adafruit-circuitpython-pypixelbuf": {
+            "hashes": [
+                "sha256:c23c5fb66d69e79ba27922d365ae6e7828e9b9fd8460763fb8ac11da4e06551d"
+            ],
+            "version": "==2.2.4"
+        },
+        "adafruit-platformdetect": {
+            "hashes": [
+                "sha256:31275dcf949c8b00598aaf2b0da65d970a0cba28e7cb45691d5f354b8e82fe85"
+            ],
+            "markers": "python_full_version >= '3.6.0'",
+            "version": "==3.4.1"
+        },
+        "adafruit-pureio": {
+            "hashes": [
+                "sha256:c6702589aa4bf6dc785e5f4e4ed7e68bef1d93d180633abe548fe3f39d36cad5"
+            ],
+            "markers": "python_full_version >= '3.5.0'",
+            "version": "==1.1.8"
+        },
+        "awsiotpythonsdk": {
+            "hashes": [
+                "sha256:84b440c5929f33da1cd204f3ad0ea891e208637dd63de9fb039ed7d49d78c303"
+            ],
+            "index": "pypi",
+            "version": "==1.4.9"
+        },
+        "install": {
+            "hashes": [
+                "sha256:1455304a2475b6753a9b0c28243ca7d8b7d71aeea1a88e6de94034fc57d765a0",
+                "sha256:dfec614e0cc90f00659067a078bc2ec032d9f0758f3df230c073eeaffd0cefa1"
+            ],
+            "index": "pypi",
+            "version": "==1.3.4"
+        },
+        "pyftdi": {
+            "hashes": [
+                "sha256:21e84163a48057de9e4eba6efcb42e51994868b702e1eabdbd2a8cbddad66b66",
+                "sha256:e8123dc3663ff3ac89eac962774e755b611e7f7202e9e36f6b6eb915fedc53f1"
+            ],
+            "markers": "python_full_version >= '3.5.0'",
+            "version": "==0.52.9"
+        },
+        "pyserial": {
+            "hashes": [
+                "sha256:3c77e014170dfffbd816e6ffc205e9842efb10be9f58ec16d3e8675b4925cddb",
+                "sha256:c4451db6ba391ca6ca299fb3ec7bae67a5c55dde170964c7a14ceefec02f2cf0"
+            ],
+            "version": "==3.5"
+        },
+        "pyusb": {
+            "hashes": [
+                "sha256:7d449ad916ce58aff60b89aae0b65ac130f289c24d6a5b7b317742eccffafc38",
+                "sha256:f18eb813d3a1439918071234589162c2f209a19adbeffeb1377ce078a4aebc70"
+            ],
+            "version": "==1.1.1"
+        }
+    },
+    "develop": {}
+}
