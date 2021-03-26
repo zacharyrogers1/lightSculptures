@@ -9,10 +9,10 @@ adafruit-circuitpython-neopixel = "*"
 pip = "*"
 install = "*"
 awsiotpythonsdk = "*"
+pylint = "*"
 
 [dev-packages]
 
 [requires]
 python_version = "3.7"
-
 #Going to use pipfile to track the dependencies however virtual pipenv on raspberry pi is too slow to use.

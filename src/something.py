@@ -2,7 +2,7 @@
 import time
 import board
 import neopixel
-from lightAnimations import *
+from animations.lightAnimations import *
  
 pixel_pin = board.D18
 num_pixels = 50
@@ -28,3 +28,4 @@ while True:
     # chasingLights(pixels, num_pixels, 20, BLUE, 0.1)
     # chasingLights(pixels, num_pixels, 20, GREEN, 1.0)
     # unifiedRainbow(pixels, 3)
+
