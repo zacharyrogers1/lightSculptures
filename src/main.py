@@ -3,7 +3,8 @@ import time
 import board
 import neopixel
 from animations.lightAnimations import *
-from deviceState import *
+# from deviceState import *
+from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTShadowClient
  
 # pixel_pin = board.D18
 # num_pixels = 50
@@ -12,7 +13,7 @@ from deviceState import *
 # pixels = neopixel.NeoPixel(pixel_pin, num_pixels, auto_write=False, pixel_order=ORDER)
 #  Green->Red->Blue
 
-connectDeviceAndListenForDiff()
+# connectDeviceAndListenForDiff()
  
 RED = (0, 255, 0)
 GREEN = (255, 0, 0)
