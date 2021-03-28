@@ -17,32 +17,7 @@ QoS_Two = 2
 class StringLightsThing:
     num_pixels = 50
     reportedState = {
-        "activeAnimation": "countdown",
-        "animations": {
-            "countdown": {
-                "timeInSeconds": 5
-            },
-            "pingPong": {
-                "speed": 0.2,
-                "color": [
-                    255,
-                    0,
-                    0
-                ]
-            },
-            "unifiedRainbow": {
-                "speed": 0.7
-            },
-            "chasingLights": {
-                "speed": 0.1,
-                "numLitPixels": 7,
-                "color": [
-                    255,
-                    0,
-                    0
-                ]
-            }
-        }
+        "activeAnimation": "error",
     }
     deviceShadowHandler = None
     myAWSIoTMQTTShadowClient = None
@@ -59,7 +34,7 @@ class StringLightsThing:
         self.deviceShadowHandler = handler
         self.myAWSIoTMQTTShadowClient = client
 
-    def findStateDifferences(self, differenceDict):
+    def updateReportedStateBasedOnDifferences(self, differenceDict):
         def dictLoopAndReplace(differenceDict, reportedDict):
             for key, value in differenceDict.items():
                 if isinstance(value, dict):
@@ -68,22 +43,6 @@ class StringLightsThing:
                     reportedDict[key] = value
         dictLoopAndReplace(differenceDict, self.reportedState)
         self.updateReportedStateAfterSuccess()
-                    
-#         def iterdict(d):
-#   for k,v in d.items():        
-#      if isinstance(v, dict):
-#          iterdict(v)
-#      else:            
-#          print (k,":",v)
-
-# iterdict(D1)
-        # for objectProperty, objectValue in differenceDict.items():
-        #     self.rectifyDifferences(objectProperty, objectValue)
-    
-    # def rectifyDifferences(self, objectProperty, objectValue):
-        # if(objectProperty == 'activeAnimation'):
-        #     self.reportedState["activeAnimation"] = objectValue
-        # self.updateReportedStateAfterSuccess()
     
     def updateReportedStateAfterSuccess(self):
         reportedJSONObj = {
@@ -96,6 +55,8 @@ class StringLightsThing:
 
     def runActiveAnimation(self):
         activeAnimation = self.reportedState["activeAnimation"]
+        if(activeAnimation == 'error'):
+            error(self.pixels)
         if(activeAnimation == 'countdown'):
             countdown(self.pixels, self.reportedState["animations"]["countdown"]["timeInSeconds"])
         elif(activeAnimation == 'pingPong'):
@@ -123,7 +84,7 @@ def connectDeviceAndListenForDiff():
 def shadowDeltaHandler(payload, responseStatus, token):
     payloadDict = json.loads(payload)["state"]
     print("The Delta issssss : ", payloadDict)
-    singletonDevice.findStateDifferences(payloadDict)
+    singletonDevice.updateReportedStateBasedOnDifferences(payloadDict)
 
 def getActiveAnimationAndRun():
     singletonDevice.runActiveAnimation()

@@ -85,3 +85,11 @@ def chasingLights(pixels, num_pixels, numLitPixels, color, speed):
             pixels[currentPixel-LitPixel] = scaledBrightnessValue
         pixels.show()
         time.sleep(actualSleepInterval)
+
+def error(pixels):
+    pixels.fill((0, 255, 0))
+    pixels.show()
+    time.sleep(0.5)
+    pixels.fill((0, 0, 0))
+    pixels.show()
+    time.sleep(0.5)
