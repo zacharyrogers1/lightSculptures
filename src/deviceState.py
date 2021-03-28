@@ -60,13 +60,30 @@ class StringLightsThing:
         self.myAWSIoTMQTTShadowClient = client
 
     def findStateDifferences(self, differenceDict):
-        for objectProperty, objectValue in differenceDict.items():
-            self.rectifyDifferences(objectProperty, objectValue)
-    
-    def rectifyDifferences(self, objectProperty, objectValue):
-        if(objectProperty == 'activeAnimation'):
-            self.reportedState["activeAnimation"] = objectValue
+        def dictLoopAndReplace(differenceDict, reportedDict):
+            for key, value in differenceDict.items():
+                if isinstance(value, dict):
+                    dictLoopAndReplace(value, reportedDict[key])
+                else:
+                    reportedDict[key] = value
+        dictLoopAndReplace(differenceDict, self.reportedState)
         self.updateReportedStateAfterSuccess()
+                    
+#         def iterdict(d):
+#   for k,v in d.items():        
+#      if isinstance(v, dict):
+#          iterdict(v)
+#      else:            
+#          print (k,":",v)
+
+# iterdict(D1)
+        # for objectProperty, objectValue in differenceDict.items():
+        #     self.rectifyDifferences(objectProperty, objectValue)
+    
+    # def rectifyDifferences(self, objectProperty, objectValue):
+        # if(objectProperty == 'activeAnimation'):
+        #     self.reportedState["activeAnimation"] = objectValue
+        # self.updateReportedStateAfterSuccess()
     
     def updateReportedStateAfterSuccess(self):
         reportedJSONObj = {
