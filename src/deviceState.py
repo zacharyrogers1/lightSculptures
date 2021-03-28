@@ -117,7 +117,7 @@ def deviceStartup(deviceShadowHandler):
     # On device startup the device should:
     # 1. Set its connected attribute in reported to true
     # 2. Perform a shadow get to see what the desired state of the device is.
-    # 3. Pass the desired state of the device into the delta handler
+    # 3. Pass the desired state of the device into the reported state
     connectJSONDict = {
         "state": {
             "reported": {
