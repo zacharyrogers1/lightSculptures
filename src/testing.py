@@ -1,3 +1,5 @@
-anArray = list(range(50, 0, -1))
+import board
+import neopixel
+pixels = neopixel.NeoPixel(board.D18, 50)
 
-print(anArray)
+pixels.fill([255,0,0])
