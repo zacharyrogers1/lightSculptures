@@ -9,4 +9,5 @@ pixels = neopixel.NeoPixel(board.D18, 50, auto_write=False)
 #     translate2DPointTo1DPosition(pixels, 9, 4, (0,30,0))
 
 
-createBlankScreen(10, 5, pixels)
+createStripe(pixels, 10, 5)
+print(str(pixels))

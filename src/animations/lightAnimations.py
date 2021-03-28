@@ -102,25 +102,27 @@ def translate2DPointTo1DPosition(x, y, xAxisLength):
         oneDValue = (y+1)*xAxisLength - (x+1)
     return oneDValue
 
-def createBlankScreen(xAxisLength, yAxisLength, pixels):
-# Using above second method to create a
-# 2D array
-    pixels.fill((0,0,0))
-    pixels.show()
-    noColor = (0,30,0)
-    arr = [[noColor for i in range(yAxisLength)] for j in range(xAxisLength)]
+def createBlankScreen(xAxisLength, yAxisLength):
+    noColor = (0,0,0)
+    blank2DBoard = [[noColor for i in range(yAxisLength)] for j in range(xAxisLength)]
+    return blank2DBoard
+
+def createStripe(pixels, xAxisLength, yAxisLength):
+    screen = createBlankScreen(xAxisLength, yAxisLength)
+    for i in range(yAxisLength):
+        screen[1][i] = (0,0,255)
+    show2DimensionalDisplay(pixels, screen)
+
+def show2DimensionalDisplay(pixels, screen):
+    xAxisLength = len(screen)
+    yAxisLength = len(screen[0])
     for x in range(xAxisLength):
         for y in range(yAxisLength):
             oneDValue = translate2DPointTo1DPosition(x, y, xAxisLength)
-            pixels[oneDValue] = arr[x][y]
+            pixels[oneDValue] = screen[x][y]
     pixels.show()
 
 
-class TwoDLight:
-    def __init__(self, x, y, color):
-        self.x = x
-        self.y = y
-        self.color = color
 # (0,0) into 0
 # (1, 0) into 1
 # (9,0) into 9 
