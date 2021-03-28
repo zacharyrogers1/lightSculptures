@@ -16,3 +16,7 @@ pylint = "*"
 [requires]
 python_version = "3.7"
 #Going to use pipfile to track the dependencies however virtual pipenv on raspberry pi is too slow to use.
+
+#To install dependencies on Raspberry Pi you must do it globally because sudo gets run when starting application.
+#To install package globally: ~sudo -H pip3 install AWSIoTPythonSDK~
+

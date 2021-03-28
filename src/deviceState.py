@@ -41,7 +41,8 @@ def connectDeviceAndListenForDiff():
 def shadowDeltaHandler(payload, responseStatus, token):
     payloadDict = json.loads(payload)["state"]
     print("The Delta issssss : ", payloadDict)
-    # singletonDevice.runAnimation()
+    activeAnimation = payloadDict["activeAnimation"]
+    singletonDevice.runAnimation(activeAnimation)
 
 
 
