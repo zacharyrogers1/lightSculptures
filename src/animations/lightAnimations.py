@@ -1,5 +1,5 @@
 import time
-import animationHelpers
+from animations import animationHelpers
 
 def countdown(pixels, timeInSeconds):
     stepInterval = timeInSeconds / 255

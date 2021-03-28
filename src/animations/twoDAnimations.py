@@ -1,5 +1,5 @@
 import time
-import animationHelpers
+from animations import animationHelpers
 # from animations.animationHelpers import *
 
 
