@@ -93,3 +93,22 @@ def error(pixels):
     pixels.fill((0, 0, 0))
     pixels.show()
     time.sleep(0.5)
+
+def light2Dpixel(pixels, x, y, color):
+    if(y%2 == 0):
+        oneDValue = y*10 + x
+    else:
+        oneDValue = (y+1)*10 - (x+1)
+    pixels[oneDValue] = color
+    pixels.show()
+
+# The direction the light starts moving first is x direction
+# (0,0) into 0
+# (1, 0) into 1
+# (9,0) into 9 
+# (5,1) into 14
+# (0,1) into 19
+# (0,2) into 20
+# (5, 2) into 25
+# (9, 4) into 49
+
