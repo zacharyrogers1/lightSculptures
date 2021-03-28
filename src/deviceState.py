@@ -60,7 +60,7 @@ class StringLightsThing:
         self.myAWSIoTMQTTShadowClient = client
 
     def findStateDifferences(self, differenceDict):
-        for objectProperty, objectValue in differenceDict:
+        for objectProperty, objectValue in differenceDict.items():
             self.rectifyDifferences(objectProperty, objectValue)
     
     def rectifyDifferences(self, objectProperty, objectValue):
