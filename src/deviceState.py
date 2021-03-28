@@ -128,7 +128,13 @@ def deviceStartup(deviceShadowHandler):
     connectJSONString = json.dumps(connectJSONDict)
     deviceShadowHandler.shadowUpdate(
         connectJSONString, customShadowCallback_Update, CONST_TIMEOUT)
-    # deviceShadowHandler.shadowGet(loadDesiredState, CONST_TIMEOUT)
+    deviceShadowHandler.shadowGet(loadDesiredState, CONST_TIMEOUT)
+
+def loadDesiredState(payload, responseStatus, token):
+    payloadDict = json.loads(payload)
+    desiredPayloadDict = payloadDict["state"]["desired"]
+
+    singletonDevice.reportedState = desiredPayloadDict
 
 
 def customShadowCallback_Update(payload, responseStatus, token):
