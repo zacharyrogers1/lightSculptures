@@ -94,15 +94,33 @@ def error(pixels):
     pixels.show()
     time.sleep(0.5)
 
-def light2Dpixel(pixels, x, y, color):
+def translate2DPointTo1DPosition(x, y, xAxisLength):
+# The direction the light starts moving first is x direction
     if(y%2 == 0):
-        oneDValue = y*10 + x
+        oneDValue = y*xAxisLength + x
     else:
-        oneDValue = (y+1)*10 - (x+1)
-    pixels[oneDValue] = color
+        oneDValue = (y+1)*xAxisLength - (x+1)
+    return oneDValue
+
+def createBlankScreen(xAxisLength, yAxisLength, pixels):
+# Using above second method to create a
+# 2D array
+    pixels.fill((0,0,0))
+    pixels.show()
+    noColor = (0,30,0)
+    arr = [[noColor for i in range(xAxisLength)] for j in range(yAxisLength)]
+    for x in range(xAxisLength):
+        for y in range(yAxisLength):
+            oneDValue = translate2DPointTo1DPosition(x, y, xAxisLength)
+            pixels[oneDValue] = arr[x][y]
     pixels.show()
 
-# The direction the light starts moving first is x direction
+
+class TwoDLight:
+    def __init__(self, x, y, color):
+        self.x = x
+        self.y = y
+        self.color = color
 # (0,0) into 0
 # (1, 0) into 1
 # (9,0) into 9 
