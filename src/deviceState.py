@@ -71,7 +71,7 @@ class StringLightsThing:
     def updateReportedStateAfterSuccess(self):
         reportedJSONObj = {
             "state": {
-                "reported": str(self.reportedState)
+                "reported": self.reportedState
             }
         }
         reportJson = json.dumps(reportedJSONObj)
