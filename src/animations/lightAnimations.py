@@ -108,7 +108,7 @@ def createBlankScreen(xAxisLength, yAxisLength, pixels):
     pixels.fill((0,0,0))
     pixels.show()
     noColor = (0,30,0)
-    arr = [[noColor for i in range(xAxisLength)] for j in range(yAxisLength)]
+    arr = [[noColor for i in range(yAxisLength)] for j in range(xAxisLength)]
     for x in range(xAxisLength):
         for y in range(yAxisLength):
             oneDValue = translate2DPointTo1DPosition(x, y, xAxisLength)
