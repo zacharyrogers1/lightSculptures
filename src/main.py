@@ -24,6 +24,7 @@ WHITE = (255,255,255)
 # Look at the activeAnimation and make the lights start displaying that animation
  
 while True:
+    getActiveAnimationAndRun()
     time.sleep(1)
     # Every loop go and fetch what animation should be called, then call that animation
     # unifiedRainbow(pixels, 0.2)
