@@ -1,5 +1,7 @@
 from awsShadow.awsSetup import doAllAwsSetup
 from animations.lightAnimations import *
+import board
+import neopixel
 
 import json
 
@@ -11,6 +13,26 @@ QoS_Zero = 0
 QoS_One = 1
 QoS_Two = 2
 
+class StringLightsThing:
+    num_pixels = 50
+
+    def __init__(self):
+        self.desiredState = {}
+        pixel_pin = board.D18
+        num_pixels = 50
+        ORDER = neopixel.GRB
+        self.pixels = neopixel.NeoPixel(pixel_pin, num_pixels, auto_write=False, pixel_order=ORDER)
+
+    def runAnimation(self, activeAnimation):
+        if(activeAnimation == 'unifiedRainbow'):
+            unifiedRainbow(self.pixels, 0.2)
+        elif(activeAnimation == 'pingPong'):
+            pingPong(self.pixels, self.num_pixels, 0.1, (0, 0, 255))
+        else:
+            print('NO ACTIVE ANIMATION FOUND FOR: ', activeAnimation)
+
+singletonDevice = StringLightsThing()
+
 def connectDeviceAndListenForDiff():
     (deviceShadowHandler, myAWSIoTMQTTShadowClient) = doAllAwsSetup()
     deviceShadowHandler.shadowRegisterDeltaCallback(shadowDeltaHandler)
@@ -19,7 +41,8 @@ def connectDeviceAndListenForDiff():
 def shadowDeltaHandler(payload, responseStatus, token):
     payloadDict = json.loads(payload)["state"]
     print("The Delta issssss : ", payloadDict)
-    
+    # singletonDevice.runAnimation()
+
 
 
 def deviceStartup(deviceShadowHandler):
@@ -51,17 +74,3 @@ def customShadowCallback_Update(payload, responseStatus, token):
     if responseStatus == "rejected":
         print("Update request " + token + " rejected!")
 
-class StringLightsThing:
-    num_pixels = 50
-
-    def __init__(self, pixels):
-        self.desiredState = {}
-        self.pixels = pixels
-
-    def runAnimation(self, activeAnimation):
-        if(activeAnimation == 'unifiedRainbow'):
-            unifiedRainbow(self.pixels, 0.2)
-        elif(activeAnimation == 'pingPong'):
-            pingPong(self.pixels, self.num_pixels, 0.1, (0, 0, 255))
-        else:
-            print('NO ACTIVE ANIMATION FOUND FOR: ', activeAnimation)
