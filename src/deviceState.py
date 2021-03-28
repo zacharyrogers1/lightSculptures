@@ -57,7 +57,7 @@ class StringLightsThing:
         activeAnimation = self.reportedState["activeAnimation"]
         if(activeAnimation == 'error'):
             error(self.pixels)
-        if(activeAnimation == 'countdown'):
+        elif(activeAnimation == 'countdown'):
             countdown(self.pixels, self.reportedState["animations"]["countdown"]["timeInSeconds"])
         elif(activeAnimation == 'pingPong'):
             colorTuple = tuple(self.reportedState["animations"]["pingPong"]["color"])
