@@ -1,4 +1,5 @@
 import time
+from animationHelpers import *
 
 def countdown(pixels, timeInSeconds):
     stepInterval = timeInSeconds / 255
@@ -32,27 +33,6 @@ def pingPong(pixels, num_pixels, speed, color=(255,0,0)):
         pixels.show()
         time.sleep(actualSleepInterval)
 
-def getNormalizedSpeed(speed, maxSleepInterval):
-    if(speed > 1.0):
-        return 1.0 * maxSleepInterval
-    elif(speed < 0):
-        return 0 
-    return speed * maxSleepInterval
-
-
-def wheel(pos):
-    # Input a value 0 to 255 to get a color value.
-    # The colours are a transition r - g - b - back to r.
-    if pos < 0 or pos > 255:
-        return (0, 0, 0)
-    if pos < 85:
-        return (255 - pos * 3, pos * 3, 0)
-    if pos < 170:
-        pos -= 85
-        return (0, 255 - pos * 3, pos * 3)
-    pos -= 170
-    return (pos * 3, 0, 255 - pos * 3)
-
 def unifiedRainbow(pixels, speed):
     maxSleepInterval = 0.25
 
@@ -61,9 +41,6 @@ def unifiedRainbow(pixels, speed):
         pixels.fill(wheel(i))
         pixels.show()
         time.sleep(actualSleepInterval)
-
-def scaleBrightnessOfColor(color, percentage):
-    return tuple([percentage*x for x in color])
 
 def chasingLights(pixels, num_pixels, numLitPixels, color, speed):
 
