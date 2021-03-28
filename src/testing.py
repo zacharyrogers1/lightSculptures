@@ -1,6 +1,6 @@
 import board
 import neopixel
-from animations.lightAnimations import *
+from animations.TwoDAnimations import *
 
 pixels = neopixel.NeoPixel(board.D18, 50, auto_write=False)
 
@@ -9,5 +9,5 @@ pixels = neopixel.NeoPixel(board.D18, 50, auto_write=False)
 #     translate2DPointTo1DPosition(pixels, 9, 4, (0,30,0))
 
 
-createStripe(pixels, 10, 5)
+scanningStripe(pixels, 10, 5)
 print(str(pixels))
