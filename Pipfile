@@ -11,6 +11,7 @@ install = "*"
 awsiotpythonsdk = "*"
 pylint = "*"
 autopep8 = "*"
+rope = "*"
 
 [dev-packages]
 
