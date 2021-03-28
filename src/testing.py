@@ -1,6 +1,6 @@
 import board
 import neopixel
-from animations.TwoDAnimations import *
+from animations.twoDAnimations import *
 
 pixels = neopixel.NeoPixel(board.D18, 50, auto_write=False)
 
