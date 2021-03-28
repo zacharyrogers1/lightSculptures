@@ -1,15 +1,16 @@
 import time
-from animations.animationHelpers import *
+import animationHelpers
+# from animations.animationHelpers import *
 
 
 def scanningStripe(pixels, xAxisLength, yAxisLength, speed, color):
     maxSleepInterval = 1
-    normalizedSpeed = getNormalizedSpeed(speed, maxSleepInterval)
+    normalizedSpeed = animationHelpers.getNormalizedSpeed(speed, maxSleepInterval)
 
-    screen = createBlankScreen(xAxisLength, yAxisLength)
+    screen = animationHelpers.createBlankScreen(xAxisLength, yAxisLength)
     for x in range (xAxisLength):
         for y in range(yAxisLength):
             screen[x][y] = (0,0,255)
-        show2DimensionalDisplay(pixels, screen)
-        screen = createBlankScreen(xAxisLength, yAxisLength)
+        animationHelpers.show2DimensionalDisplay(pixels, screen)
+        screen = animationHelpers.createBlankScreen(xAxisLength, yAxisLength)
         time.sleep(normalizedSpeed)

@@ -1,5 +1,5 @@
 import time
-from animations.animationHelpers import *
+import animationHelpers
 
 def countdown(pixels, timeInSeconds):
     stepInterval = timeInSeconds / 255
@@ -13,7 +13,7 @@ def countdown(pixels, timeInSeconds):
 def pingPong(pixels, num_pixels, speed, color=(255,0,0)):
     maxSleepInterval = 0.5
 
-    actualSleepInterval = getNormalizedSpeed(speed, maxSleepInterval)
+    actualSleepInterval = animationHelpers.getNormalizedSpeed(speed, maxSleepInterval)
     pixels.fill((0,0,0))
     pixels.show()
     for i in range(num_pixels):
@@ -36,9 +36,9 @@ def pingPong(pixels, num_pixels, speed, color=(255,0,0)):
 def unifiedRainbow(pixels, speed):
     maxSleepInterval = 0.25
 
-    actualSleepInterval = getNormalizedSpeed(speed, maxSleepInterval)
+    actualSleepInterval = animationHelpers.getNormalizedSpeed(speed, maxSleepInterval)
     for i in range(255):
-        pixels.fill(wheel(i))
+        pixels.fill(animationHelpers.wheel(i))
         pixels.show()
         time.sleep(actualSleepInterval)
 
@@ -51,14 +51,14 @@ def chasingLights(pixels, num_pixels, numLitPixels, color, speed):
             return numLitPixels
 
     maxSleepInterval = 0.3
-    actualSleepInterval = getNormalizedSpeed(speed,maxSleepInterval)
+    actualSleepInterval = animationHelpers.getNormalizedSpeed(speed,maxSleepInterval)
     pixels.fill((0,0,0))
     pixels.show()
     for currentPixel in range(num_pixels):
         numTrailingPixels = determineNumberTrailingPixels(currentPixel, numLitPixels)
         for LitPixel in range(numTrailingPixels + 1):
             thePercentage = (numLitPixels - LitPixel) / numLitPixels
-            scaledBrightnessValue = scaleBrightnessOfColor(color, thePercentage)
+            scaledBrightnessValue = animationHelpers.scaleBrightnessOfColor(color, thePercentage)
             pixels[currentPixel-LitPixel] = scaledBrightnessValue
         pixels.show()
         time.sleep(actualSleepInterval)

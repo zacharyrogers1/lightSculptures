@@ -1,5 +1,5 @@
 from awsShadow.awsSetup import doAllAwsSetup
-from animations.lightAnimations import *
+from animations import lightAnimations
 import board
 import neopixel
 
@@ -56,19 +56,19 @@ class StringLightsThing:
     def runActiveAnimation(self):
         activeAnimation = self.reportedState["activeAnimation"]
         if(activeAnimation == 'error'):
-            error(self.pixels)
+            lightAnimations.error(self.pixels)
         elif(activeAnimation == 'countdown'):
             countdownSettings = self.reportedState["animations"]["countdown"]
-            countdown(self.pixels, countdownSettings["timeInSeconds"])
+            lightAnimations.countdown(self.pixels, countdownSettings["timeInSeconds"])
         elif(activeAnimation == 'pingPong'):
             pingPongSettings = self.reportedState["animations"]["pingPong"]
-            pingPong(self.pixels, self.num_pixels, pingPongSettings["speed"], pingPongSettings["color"])
+            lightAnimations.pingPong(self.pixels, self.num_pixels, pingPongSettings["speed"], pingPongSettings["color"])
         elif(activeAnimation == 'unifiedRainbow'):
             unifiedRainbowSettings = self.reportedState["animations"]["unifiedRainbow"]
-            unifiedRainbow(self.pixels, unifiedRainbowSettings["speed"])
+            lightAnimations.unifiedRainbow(self.pixels, unifiedRainbowSettings["speed"])
         elif(activeAnimation == 'chasingLights'):
             chasingLightsSettings = self.reportedState["animations"]["chasingLights"]
-            chasingLights(self.pixels, self.num_pixels, chasingLightsSettings["numLitPixels"], chasingLightsSettings["color"], chasingLightsSettings["speed"])
+            lightAnimations.chasingLights(self.pixels, self.num_pixels, chasingLightsSettings["numLitPixels"], chasingLightsSettings["color"], chasingLightsSettings["speed"])
         else:
             print('NO ACTIVE ANIMATION FOUND FOR: ', activeAnimation)
 
