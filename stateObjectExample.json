@@ -1,0 +1,28 @@
+{
+    "activeAnimation": "countdown",
+    "animations": {
+        "countdown": {
+            "timeInSeconds": 5
+        },
+        "pingPong": {
+            "speed": 0.2,
+            "color": [
+                255,
+                0,
+                0
+            ]
+        },
+        "unifiedRainbow": {
+            "speed": 0.7
+        },
+        "chasingLights": {
+            "speed": 0.1,
+            "numLitPixels": 7,
+            "color": [
+                255,
+                0,
+                0
+            ]
+        }
+    }
+}

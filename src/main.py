@@ -16,16 +16,12 @@ GREEN = (255, 0, 0)
 BLUE = (0, 0, 255)
 WHITE = (255,255,255)
 
+# Before starting loop connect to AWs and start listening to Diff
+# On first connect get the desired state and store it locally.
+# Look at the activeAnimation and make the lights start displaying that animation
  
 while True:
-    # countdown(pixels, 3)
-    # pingPong(pixels, num_pixels, 0, RED)
-    # pingPong(pixels, num_pixels, 0.5, RED)
-    # pingPong(pixels, num_pixels, 0.25, RED)
-    # unifiedRainbow(pixels, 0)
+    # Every loop go and fetch what animation should be called, then call that animation
     unifiedRainbow(pixels, 0.2)
     chasingLights(pixels, num_pixels, 20, WHITE, 0)
-    # chasingLights(pixels, num_pixels, 20, BLUE, 0.1)
-    # chasingLights(pixels, num_pixels, 20, GREEN, 1.0)
-    # unifiedRainbow(pixels, 3)
 

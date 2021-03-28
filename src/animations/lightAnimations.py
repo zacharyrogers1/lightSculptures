@@ -85,3 +85,5 @@ def chasingLights(pixels, num_pixels, numLitPixels, color, speed):
             pixels[currentPixel-LitPixel] = scaledBrightnessValue
         pixels.show()
         time.sleep(actualSleepInterval)
+
+print('HELLOOOOOOOOOOOOOOOOO')
