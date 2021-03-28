@@ -1,6 +1,8 @@
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTShadowClient
 import time
 import json
+import os
+dirname = os.path.dirname(__file__)
 
 CONST_TIMEOUT = 5
 CONST_baseReconnectQuietTimeSecond = 1
@@ -13,9 +15,9 @@ QoS_Two = 2
 def initialAwsSetup():
     myAWSIoTMQTTShadowClient = None
     host = "a1n8ytbh0zio90-ats.iot.us-east-1.amazonaws.com"
-    rootCAPath = "certs/root-CA.crt"
-    certificatePath = "certs/92183126a9-certificate.pem.crt"
-    privateKeyPath = "certs/92183126a9-private.pem.key"
+    rootCAPath = os.path.join(dirname,"certs/root-CA.crt")
+    certificatePath = os.path.join(dirname,"certs/92183126a9-certificate.pem.crt")
+    privateKeyPath = os.path.join(dirname,"certs/92183126a9-private.pem.key")
     port = 8883
     thingName = "stringLights"
     clientId = "AngryPresbyterianHouseWife"
