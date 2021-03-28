@@ -58,15 +58,17 @@ class StringLightsThing:
         if(activeAnimation == 'error'):
             error(self.pixels)
         elif(activeAnimation == 'countdown'):
-            countdown(self.pixels, self.reportedState["animations"]["countdown"]["timeInSeconds"])
+            countdownSettings = self.reportedState["animations"]["countdown"]
+            countdown(self.pixels, countdownSettings["timeInSeconds"])
         elif(activeAnimation == 'pingPong'):
-            colorTuple = tuple(self.reportedState["animations"]["pingPong"]["color"])
-            pingPong(self.pixels, self.num_pixels, self.reportedState["animations"]["pingPong"]["speed"], colorTuple)
+            pingPongSettings = self.reportedState["animations"]["pingPong"]
+            pingPong(self.pixels, self.num_pixels, pingPongSettings["speed"], pingPongSettings["color"])
         elif(activeAnimation == 'unifiedRainbow'):
-            unifiedRainbow(self.pixels, self.reportedState["animations"]["unifiedRainbow"]["speed"])
+            unifiedRainbowSettings = self.reportedState["animations"]["unifiedRainbow"]
+            unifiedRainbow(self.pixels, unifiedRainbowSettings["speed"])
         elif(activeAnimation == 'chasingLights'):
-            colorTuple = self.reportedState["animations"]["chasingLights"]["color"]
-            chasingLights(self.pixels, self.num_pixels, self.reportedState["animations"]["chasingLights"]["numLitPixels"], colorTuple, self.reportedState["animations"]["chasingLights"]["speed"])
+            chasingLightsSettings = self.reportedState["animations"]["chasingLights"]
+            chasingLights(self.pixels, self.num_pixels, chasingLightsSettings["numLitPixels"], chasingLightsSettings["color"], chasingLightsSettings["speed"])
         else:
             print('NO ACTIVE ANIMATION FOUND FOR: ', activeAnimation)
 
