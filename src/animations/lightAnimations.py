@@ -43,8 +43,9 @@ def unifiedRainbow(pixels, speed, shouldIContinueSubject):
         print("Inside subscribe: ", shouldIContinue2)
         shouldIContinue = shouldIContinue2
     
-    shouldIContinueSubject.subscribe(setFlagForContinue)
+    subscription = shouldIContinueSubject.subscribe(setFlagForContinue)
     for i in range(255):
+        print("For Loop: ", shouldIContinue)
         if (shouldIContinue == False):
             pixels.fill((0,0,0))
             pixels.show()
@@ -52,6 +53,7 @@ def unifiedRainbow(pixels, speed, shouldIContinueSubject):
         pixels.fill(animationHelpers.wheel(i))
         pixels.show()
         time.sleep(actualSleepInterval)
+    subscription.unsubscribe()
 
 def chasingLights(pixels, num_pixels, numLitPixels, color, speed):
 
