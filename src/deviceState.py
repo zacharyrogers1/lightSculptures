@@ -26,7 +26,7 @@ class StringLightsThing:
         self.desiredState = {}
         pixel_pin = board.D18
         num_pixels = 50
-        ORDER = neopixel.GRB
+        ORDER = neopixel.RGB
         self.pixels = neopixel.NeoPixel(
             pixel_pin, num_pixels, auto_write=False, pixel_order=ORDER)
 
