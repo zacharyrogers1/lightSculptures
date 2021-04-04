@@ -40,6 +40,7 @@ def unifiedRainbow(pixels, speed, shouldIContinueSubject):
     shouldIContinue = True
 
     def setFlagForContinue(shouldIContinue2):
+        nonlocal shouldIContinue
         print("Inside subscribe: ", shouldIContinue2)
         shouldIContinue = shouldIContinue2
     
