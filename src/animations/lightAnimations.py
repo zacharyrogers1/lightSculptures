@@ -50,9 +50,8 @@ def unifiedRainbow(pixels, speed, shouldIContinueSubject):
         if (shouldIContinue == False):
             pixels.fill((0,0,0))
             pixels.show()
+            subscription.dispose()
             return
-        if(i == 35):
-            shouldIContinueSubject.on_next(False)
         pixels.fill(animationHelpers.wheel(i))
         pixels.show()
         time.sleep(actualSleepInterval)
