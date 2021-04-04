@@ -6,10 +6,10 @@ from rx import of, subject
 
 pixels = neopixel.NeoPixel(board.D18, 50, auto_write=False)
 
-shouldIContinueSubject = subject.BehaviorSubject(True)
+shouldIContinueSubject = subject.BehaviorSubject(True).subscribe()
 
 while True:
-    lightAnimations.unifiedRainbow(pixels, 0.4, shouldIContinueSubject)
+    lightAnimations.unifiedRainbow(pixels, 0.2, shouldIContinueSubject)
     shouldIContinueSubject.on_next(False)
 
 # # while True:

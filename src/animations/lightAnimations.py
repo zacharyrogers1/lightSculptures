@@ -53,7 +53,7 @@ def unifiedRainbow(pixels, speed, shouldIContinueSubject):
         pixels.fill(animationHelpers.wheel(i))
         pixels.show()
         time.sleep(actualSleepInterval)
-    subscription.unsubscribe()
+    subscription.dispose()
 
 def chasingLights(pixels, num_pixels, numLitPixels, color, speed):
 
