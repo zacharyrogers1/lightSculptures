@@ -33,11 +33,22 @@ def pingPong(pixels, num_pixels, speed, color=(255,0,0)):
         pixels.show()
         time.sleep(actualSleepInterval)
 
-def unifiedRainbow(pixels, speed):
+def unifiedRainbow(pixels, speed, shouldIContinueSubject):
     maxSleepInterval = 0.25
 
     actualSleepInterval = animationHelpers.getNormalizedSpeed(speed, maxSleepInterval)
+    shouldIContinue = True
+
+    def setFlagForContinue(shouldIContinue2):
+        print("Inside subscribe: ", shouldIContinue2)
+        shouldIContinue = shouldIContinue2
+    
+    shouldIContinueSubject.subscribe(setFlagForContinue)
     for i in range(255):
+        if (shouldIContinue == False):
+            pixels.fill((0,0,0))
+            pixels.show()
+            return
         pixels.fill(animationHelpers.wheel(i))
         pixels.show()
         time.sleep(actualSleepInterval)
@@ -71,15 +82,9 @@ def error(pixels):
     pixels.show()
     time.sleep(0.5)
 
-
-
-
-# (0,0) into 0
-# (1, 0) into 1
-# (9,0) into 9 
-# (5,1) into 14
-# (0,1) into 19
-# (0,2) into 20
-# (5, 2) into 25
-# (9, 4) into 49
+# Pass in observable to all of the animations
+#  1. Start of animation subscribe to observable.
+# 2. create value outside of observable
+# 3. When the observable fires set the value which was created outside
+#4. For most of the animations there is a for loop. At the start of this for loop see if the value has changed. If value has changed then return out of animation. (potentially create blank screen)
 
