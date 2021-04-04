@@ -1,5 +1,0 @@
-Angular
-1. Hookup Frontend to send IoT commands and change state. 
-
-2D Grid
-1. Work on 2D grid implementation

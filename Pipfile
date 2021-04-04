@@ -12,6 +12,7 @@ awsiotpythonsdk = "*"
 pylint = "*"
 autopep8 = "*"
 rope = "*"
+rx = "*"
 
 [dev-packages]
 
