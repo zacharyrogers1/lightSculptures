@@ -81,8 +81,8 @@ singletonDevice = StringLightsThing()
 def connectDeviceAndListenForDiff():
     (deviceShadowHandler, myAWSIoTMQTTShadowClient) = doAllAwsSetup()
     singletonDevice.initializeHandlerAndAwsClient(deviceShadowHandler, myAWSIoTMQTTShadowClient)
-    deviceShadowHandler.shadowRegisterDeltaCallback(shadowDeltaHandler)
     deviceStartup(deviceShadowHandler)
+    deviceShadowHandler.shadowRegisterDeltaCallback(shadowDeltaHandler)
 
 
 def shadowDeltaHandler(payload, responseStatus, token):
