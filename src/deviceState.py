@@ -45,7 +45,6 @@ class StringLightsThing:
                     reportedDict[key] = value
         dictLoopAndReplace(overallDifferenceDict, self.reportedState)
         self.updateReportedStateAfterSuccess()
-        self.runActiveAnimation()
     
     def updateReportedStateAfterSuccess(self):
         reportedJSONObj = {
