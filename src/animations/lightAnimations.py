@@ -33,21 +33,21 @@ def pingPong(pixels, num_pixels, speed, color=(255,0,0)):
         pixels.show()
         time.sleep(actualSleepInterval)
 
-def unifiedRainbow(pixels, speed, shouldIContinueSubject):
+def unifiedRainbow(pixels, speed, shouldCurrentAnimationStopRunningSubject):
     maxSleepInterval = 0.25
 
     actualSleepInterval = animationHelpers.getNormalizedSpeed(speed, maxSleepInterval)
-    shouldIContinue = True
+    shouldAnimationStop = False
 
-    def setFlagForContinue(shouldIContinue2):
-        nonlocal shouldIContinue
-        print("Inside subscribe: ", shouldIContinue2)
-        shouldIContinue = shouldIContinue2
+    def setFlagForStop(shouldIStop2):
+        nonlocal shouldAnimationStop
+        print("Inside subscribe: ", shouldIStop2)
+        shouldAnimationStop = shouldIStop2
     
-    subscription = shouldIContinueSubject.subscribe(setFlagForContinue)
+    subscription = shouldCurrentAnimationStopRunningSubject.subscribe(setFlagForStop)
     for i in range(255):
-        print("For Loop: ", shouldIContinue)
-        if (shouldIContinue == False):
+        print("For Loop: ", shouldAnimationStop)
+        if (shouldAnimationStop == True):
             pixels.fill((0,0,0))
             pixels.show()
             subscription.dispose()
