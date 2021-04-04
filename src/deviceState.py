@@ -34,14 +34,16 @@ class StringLightsThing:
         self.deviceShadowHandler = handler
         self.myAWSIoTMQTTShadowClient = client
 
-    def updateReportedStateBasedOnDifferences(self, differenceDict):
-        def dictLoopAndReplace(differenceDict, reportedDict):
-            for key, value in differenceDict.items():
+    def updateReportedStateBasedOnDifferences(self, overallDifferenceDict):
+        def dictLoopAndReplace(subDifferenceDict, reportedDict):
+            print("I am subDifferenceDist: ", subDifferenceDict)
+            print("reportedDict: ", reportedDict)
+            for key, value in subDifferenceDict.items():
                 if isinstance(value, dict):
                     dictLoopAndReplace(value, reportedDict[key])
                 else:
                     reportedDict[key] = value
-        dictLoopAndReplace(differenceDict, self.reportedState)
+        dictLoopAndReplace(overallDifferenceDict, self.reportedState)
         self.updateReportedStateAfterSuccess()
     
     def updateReportedStateAfterSuccess(self):
