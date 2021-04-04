@@ -3,7 +3,6 @@ from animations import lightAnimations
 import board
 import neopixel
 import json
-from rx import of, subject
 
 CONST_TIMEOUT = 5
 CONST_baseReconnectQuietTimeSecond = 1
@@ -21,7 +20,6 @@ class StringLightsThing:
     }
     deviceShadowHandler = None
     myAWSIoTMQTTShadowClient = None
-    shouldCurrentAnimationStopRunningSubject = subject.BehaviorSubject(False)
 
     def __init__(self):
         self.desiredState = {}
@@ -46,9 +44,6 @@ class StringLightsThing:
                     reportedDict[key] = value
         dictLoopAndReplace(overallDifferenceDict, self.reportedState)
         self.updateReportedStateAfterSuccess()
-        self.shouldCurrentAnimationStopRunningSubject.on_next(True)
-        self.shouldCurrentAnimationStopRunningSubject.on_next(False)
-        self.runActiveAnimation()
     
     def updateReportedStateAfterSuccess(self):
         reportedJSONObj = {
@@ -71,7 +66,7 @@ class StringLightsThing:
             lightAnimations.pingPong(self.pixels, self.num_pixels, pingPongSettings["speed"], pingPongSettings["color"])
         elif(activeAnimation == 'unifiedRainbow'):
             unifiedRainbowSettings = self.reportedState["animations"]["unifiedRainbow"]
-            lightAnimations.unifiedRainbow(self.pixels, unifiedRainbowSettings["speed"], self.shouldCurrentAnimationStopRunningSubject)
+            lightAnimations.unifiedRainbow(self.pixels, unifiedRainbowSettings["speed"])
         elif(activeAnimation == 'chasingLights'):
             chasingLightsSettings = self.reportedState["animations"]["chasingLights"]
             lightAnimations.chasingLights(self.pixels, self.num_pixels, chasingLightsSettings["numLitPixels"], chasingLightsSettings["color"], chasingLightsSettings["speed"])
