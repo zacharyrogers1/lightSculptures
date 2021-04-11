@@ -40,6 +40,7 @@ def unifiedRainbow(pixels, speed, isAnimationActiveSubject):
     isAnimationActive = True
 
     def setFlagForStop(shouldIStop2):
+        print("setFlagForStop: ", shouldIStop2)
         nonlocal isAnimationActive
         if(shouldIStop2 == False):
             isAnimationActive = shouldIStop2
