@@ -4,6 +4,7 @@ import board
 import neopixel
 import json
 from rx import of, subject
+import time
 
 CONST_TIMEOUT = 5
 CONST_baseReconnectQuietTimeSecond = 1
@@ -60,6 +61,8 @@ class StringLightsThing:
     def runAnimationWhenStopped(self, isAnimationActive):
         print("AlwaysChecking subscription: ", isAnimationActive)
         if(isAnimationActive == False):
+            time.sleep(1)
+            print("Always Checking subscription updating to True")
             isAnimationActiveSubject.on_next(True)
             self.runActiveAnimation()
 
