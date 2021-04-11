@@ -47,6 +47,7 @@ class StringLightsThing:
                     reportedDict[key] = value
         dictLoopAndReplace(overallDifferenceDict, self.reportedState)
         self.updateReportedStateAfterSuccess()
+        print("INTERRUPT: Setting Subject False")
         isAnimationActiveSubject.on_next(False)
     
     def updateReportedStateAfterSuccess(self):
