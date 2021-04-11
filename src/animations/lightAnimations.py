@@ -57,7 +57,7 @@ def unifiedRainbow(pixels, speed, isAnimationActiveSubject):
         pixels.show()
         time.sleep(actualSleepInterval)
     subscription.dispose()
-    isAnimationActive.on_next(False)
+    isAnimationActiveSubject.on_next(False)
 
 def chasingLights(pixels, num_pixels, numLitPixels, color, speed):
 
