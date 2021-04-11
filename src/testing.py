@@ -1,7 +1,8 @@
 # import board
 # import neopixel
 from animations import twoDAnimations, lightAnimations
-from rx import of, subject
+from rx import of, subject, operators
+import time
 
 
 # pixels = neopixel.NeoPixel(board.D18, 50, auto_write=False)
@@ -11,19 +12,27 @@ shouldIContinueSubject = subject.BehaviorSubject(True)
 shouldIContinue = True
 
 def change(shouldIContinue2):
-    global shouldIContinue
+    print("Subscriber #1: ", shouldIContinue2)
+    time.sleep(5)
+    print("Subscriber 1 finished waiting")
+    # global shouldIContinue
     shouldIContinue = shouldIContinue2
 
-shouldIContinueSubject.subscribe(change)
-for i in range(1000000):
+def change2(idk):
+    print("subscriber #2: ", idk)
+
+shouldIContinueSubject.pipe(operators.delay(0.001)).subscribe(change)
+shouldIContinueSubject.subscribe(change2)
+for i in range(10000000):
     if(shouldIContinue == False):
         print('Exiting Early: ', i)
         break
     if(i == 8000):
         shouldIContinueSubject.on_next(False)
-    something = 7
 print("finished for loop")
 
+while True:
+    something = 7
 # # while True:
 # #     translate2DPointTo1DPosition(pixels, 4, 3, (30,0,0))
 # #     translate2DPointTo1DPosition(pixels, 9, 4, (0,30,0))

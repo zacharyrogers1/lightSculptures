@@ -3,7 +3,7 @@ from animations import lightAnimations
 import board
 import neopixel
 import json
-from rx import of, subject
+from rx import of, subject, operators
 import time
 
 CONST_TIMEOUT = 5
@@ -32,7 +32,7 @@ class StringLightsThing:
         ORDER = neopixel.RGB
         self.pixels = neopixel.NeoPixel(
             pixel_pin, num_pixels, auto_write=False, pixel_order=ORDER)
-        isAnimationActiveSubject.subscribe(self.runAnimationWhenStopped)
+        isAnimationActiveSubject.pipe(operators.delay(0.001)).subscribe(self.runAnimationWhenStopped)
 
     def initializeHandlerAndAwsClient(self, handler, client):
         self.deviceShadowHandler = handler
@@ -63,7 +63,7 @@ class StringLightsThing:
         if(isAnimationActive == False):
             time.sleep(1)
             print("Always Checking subscription updating to True")
-            # isAnimationActiveSubject.on_next(True)
+            isAnimationActiveSubject.on_next(True)
             self.runActiveAnimation()
 
     def runActiveAnimation(self):
