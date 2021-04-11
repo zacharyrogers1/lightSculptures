@@ -131,12 +131,13 @@ def loadDesiredState(payload, responseStatus, token):
 
 
 def customShadowCallback_Update(payload, responseStatus, token):
-    if responseStatus == "timeout":
-        print("Update request " + token + " time out!")
-    if responseStatus == "accepted":
-        print("~~~~~~~~~~~~~~~~~~~~~~~")
-        print(payload)
-        print("Update request with token: " + token + " accepted!")
-        print("~~~~~~~~~~~~~~~~~~~~~~~\n\n")
-    if responseStatus == "rejected":
-        print("Update request " + token + " rejected!")
+    return
+    # if responseStatus == "timeout":
+    #     print("Update request " + token + " time out!")
+    # if responseStatus == "accepted":
+    #     print("~~~~~~~~~~~~~~~~~~~~~~~")
+    #     print(payload)
+    #     print("Update request with token: " + token + " accepted!")
+    #     print("~~~~~~~~~~~~~~~~~~~~~~~\n\n")
+    # if responseStatus == "rejected":
+    #     print("Update request " + token + " rejected!")
