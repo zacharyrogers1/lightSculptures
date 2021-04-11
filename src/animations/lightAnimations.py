@@ -33,15 +33,29 @@ def pingPong(pixels, num_pixels, speed, color=(255,0,0)):
         pixels.show()
         time.sleep(actualSleepInterval)
 
-def unifiedRainbow(pixels, speed):
+def unifiedRainbow(pixels, speed, isAnimationActiveSubject):
     maxSleepInterval = 0.25
 
     actualSleepInterval = animationHelpers.getNormalizedSpeed(speed, maxSleepInterval)
+    isAnimationActive = True
 
+    def setFlagForStop(shouldIStop2):
+        nonlocal isAnimationActive
+        if(shouldIStop2 == False):
+            isAnimationActive = shouldIStop2
+    
+    subscription = isAnimationActiveSubject.subscribe(setFlagForStop)
     for i in range(255):
+        print("For Loop: ", isAnimationActive)
+        if (isAnimationActive == False):
+            pixels.fill((0,0,0))
+            pixels.show()
+            subscription.dispose()
+            return
         pixels.fill(animationHelpers.wheel(i))
         pixels.show()
         time.sleep(actualSleepInterval)
+    subscription.dispose()
 
 def chasingLights(pixels, num_pixels, numLitPixels, color, speed):
 
