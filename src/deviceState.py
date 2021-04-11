@@ -39,8 +39,6 @@ class StringLightsThing:
 
     def updateReportedStateBasedOnDifferences(self, overallDifferenceDict):
         def dictLoopAndReplace(subDifferenceDict, reportedDict):
-            print("I am subDifferenceDist: ", subDifferenceDict)
-            print("reportedDict: ", reportedDict)
             for key, value in subDifferenceDict.items():
                 if isinstance(value, dict):
                     dictLoopAndReplace(value, reportedDict[key])
@@ -62,7 +60,7 @@ class StringLightsThing:
     def runAnimationWhenStopped(self, isAnimationActive):
         print("AlwaysChecking subscription: ", isAnimationActive)
         if(isAnimationActive == False):
-            # self.isAnimationActiveSubject.on_next(True)
+            self.isAnimationActiveSubject.on_next(True)
             self.runActiveAnimation()
 
     def runActiveAnimation(self):
