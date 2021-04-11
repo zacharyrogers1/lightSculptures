@@ -32,7 +32,7 @@ class StringLightsThing:
         ORDER = neopixel.RGB
         self.pixels = neopixel.NeoPixel(
             pixel_pin, num_pixels, auto_write=False, pixel_order=ORDER)
-        isAnimationActiveSubject.pipe(operators.delay(0.001)).subscribe(self.runAnimationWhenStopped)
+        isAnimationActiveSubject.pipe(operators.delay(0.1)).subscribe(self.runAnimationWhenStopped)
 
     def initializeHandlerAndAwsClient(self, handler, client):
         self.deviceShadowHandler = handler
