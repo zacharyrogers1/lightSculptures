@@ -46,8 +46,8 @@ def unifiedRainbow(pixels, speed, isAnimationActiveSubject):
     
     subscription = isAnimationActiveSubject.subscribe(setFlagForStop)
     for i in range(255):
-        print("For Loop: ", isAnimationActive)
         if (isAnimationActive == False):
+            print("Should be shutting Down animation: ", isAnimationActive)
             pixels.fill((0,0,0))
             pixels.show()
             subscription.dispose()
@@ -56,6 +56,7 @@ def unifiedRainbow(pixels, speed, isAnimationActiveSubject):
         pixels.show()
         time.sleep(actualSleepInterval)
     subscription.dispose()
+    isAnimationActive.on_next(False)
 
 def chasingLights(pixels, num_pixels, numLitPixels, color, speed):
 

@@ -60,6 +60,7 @@ class StringLightsThing:
         self.deviceShadowHandler.shadowUpdate(reportJson, customShadowCallback_Update, CONST_TIMEOUT)
 
     def runAnimationWhenStopped(self, isAnimationActive):
+        print("AlwaysChecking subscription: ", isAnimationActive)
         if(isAnimationActive == False):
             self.isAnimationActiveSubject.on_next(True)
             self.runActiveAnimation()
