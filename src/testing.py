@@ -1,16 +1,28 @@
-import board
-import neopixel
+# import board
+# import neopixel
 from animations import twoDAnimations, lightAnimations
 from rx import of, subject
 
 
-pixels = neopixel.NeoPixel(board.D18, 50, auto_write=False)
+# pixels = neopixel.NeoPixel(board.D18, 50, auto_write=False)
 
 shouldIContinueSubject = subject.BehaviorSubject(True)
 
-while True:
-    lightAnimations.unifiedRainbow(pixels, 0.2, shouldIContinueSubject)
-    shouldIContinueSubject.on_next(False)
+shouldIContinue = True
+
+def change(shouldIContinue2):
+    global shouldIContinue
+    shouldIContinue = shouldIContinue2
+
+shouldIContinueSubject.subscribe(change)
+for i in range(1000000):
+    if(shouldIContinue == False):
+        print('Exiting Early: ', i)
+        break
+    if(i == 8000):
+        shouldIContinueSubject.on_next(False)
+    something = 7
+print("finished for loop")
 
 # # while True:
 # #     translate2DPointTo1DPosition(pixels, 4, 3, (30,0,0))

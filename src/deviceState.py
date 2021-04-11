@@ -13,7 +13,7 @@ QoS_Zero = 0
 QoS_One = 1
 QoS_Two = 2
 
-
+isAnimationActiveSubject = subject.BehaviorSubject(False)
 class StringLightsThing:
     num_pixels = 50
     reportedState = {
@@ -21,7 +21,7 @@ class StringLightsThing:
     }
     deviceShadowHandler = None
     myAWSIoTMQTTShadowClient = None
-    isAnimationActiveSubject = subject.BehaviorSubject(False)
+    
     
 
     def __init__(self):
@@ -31,7 +31,7 @@ class StringLightsThing:
         ORDER = neopixel.RGB
         self.pixels = neopixel.NeoPixel(
             pixel_pin, num_pixels, auto_write=False, pixel_order=ORDER)
-        self.isAnimationActiveSubject.subscribe(self.runAnimationWhenStopped)
+        isAnimationActiveSubject.subscribe(self.runAnimationWhenStopped)
 
     def initializeHandlerAndAwsClient(self, handler, client):
         self.deviceShadowHandler = handler
@@ -46,7 +46,7 @@ class StringLightsThing:
                     reportedDict[key] = value
         dictLoopAndReplace(overallDifferenceDict, self.reportedState)
         self.updateReportedStateAfterSuccess()
-        self.isAnimationActiveSubject.on_next(False)
+        isAnimationActiveSubject.on_next(False)
     
     def updateReportedStateAfterSuccess(self):
         reportedJSONObj = {
@@ -60,7 +60,7 @@ class StringLightsThing:
     def runAnimationWhenStopped(self, isAnimationActive):
         print("AlwaysChecking subscription: ", isAnimationActive)
         if(isAnimationActive == False):
-            self.isAnimationActiveSubject.on_next(True)
+            isAnimationActiveSubject.on_next(True)
             self.runActiveAnimation()
 
     def runActiveAnimation(self):
@@ -75,7 +75,7 @@ class StringLightsThing:
             lightAnimations.pingPong(self.pixels, self.num_pixels, pingPongSettings["speed"], pingPongSettings["color"])
         elif(activeAnimation == 'unifiedRainbow'):
             unifiedRainbowSettings = self.reportedState["animations"]["unifiedRainbow"]
-            lightAnimations.unifiedRainbow(self.pixels, unifiedRainbowSettings["speed"], self.isAnimationActiveSubject)
+            lightAnimations.unifiedRainbow(self.pixels, unifiedRainbowSettings["speed"], isAnimationActiveSubject)
         elif(activeAnimation == 'chasingLights'):
             chasingLightsSettings = self.reportedState["animations"]["chasingLights"]
             lightAnimations.chasingLights(self.pixels, self.num_pixels, chasingLightsSettings["numLitPixels"], chasingLightsSettings["color"], chasingLightsSettings["speed"])
