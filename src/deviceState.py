@@ -62,7 +62,6 @@ class StringLightsThing:
     def runAnimationWhenStopped(self, isAnimationActive):
         print("AlwaysChecking subscription: ", isAnimationActive)
         if(isAnimationActive == False):
-            print("Always Checking subscription updating to True")
             isAnimationActiveSubject.on_next(True)
             self.runActiveAnimation()
 
