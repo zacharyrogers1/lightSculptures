@@ -10,6 +10,7 @@ import random
 
 shouldIContinueSubject = subject.BehaviorSubject(True)
 
+
 def intense_calculation(value):
     # sleep for a random short duration between 0.5 to 2.0 seconds to simulate a long-running calculation
     time.sleep(random.randint(5, 20) * 0.1)
@@ -21,26 +22,56 @@ optimal_thread_count = multiprocessing.cpu_count()
 pool_scheduler = ThreadPoolScheduler(optimal_thread_count)
 print("OPTIMAL THREADS: ", optimal_thread_count)
 
+
+def function1(value):
+    # print("Subscriber 1: ", value)
+    # intense_calculation(value)
+    time.sleep(10)
+    return value
+
+
+def function2(value):
+    # print("Subscriber 2 ", value)
+    time.sleep(5)
+    # intense_calculation(value)
+    return value
+
+def function3(value):
+    # print("Subscriber 2 ", value)
+    # time.sleep(1)
+    # intense_calculation(value)
+    return value
+
+
 # Create Process 1
 shouldIContinueSubject.pipe(
-    operators.map(lambda s: intense_calculation(s))
+    operators.map(function1),
+    operators.subscribe_on(pool_scheduler)
 ).subscribe(
-    on_next=lambda s: print("PROCESS 1: {0} {1}".format(current_thread().name, s)),
+    on_next=lambda value: print("subscriber 1: ", value),
     on_error=lambda e: print(e),
-    on_completed=lambda: print("PROCESS 1 done!"),
-    scheduler=operators.subscribe_on(pool_scheduler)
+    on_completed=lambda: print("PROCESS 1 done!")
 )
 
+# operators.filter(function1, )
 # Create Process 2
 shouldIContinueSubject.pipe(
-    operators.map(lambda s: intense_calculation(s))
+    operators.map(function2),
+    operators.observe_on(pool_scheduler)
 ).subscribe(
-    on_next=lambda i: print("PROCESS 2: {0} {1}".format(current_thread().name, i)),
+    on_next=lambda value: print("subscriber 2: ", value),
     on_error=lambda e: print(e),
-    on_completed=lambda: print("PROCESS 2 done!"),
-    scheduler=operators.subscribe_on(pool_scheduler)
+    on_completed=lambda: print("PROCESS 2 done!")
 )
 
+shouldIContinueSubject.pipe(
+    operators.map(function3),
+    operators.observe_on(pool_scheduler)
+).subscribe(
+    on_next=lambda value: print("subscriber 3: ", value),
+    on_error=lambda e: print(e),
+    on_completed=lambda: print("PROCESS 2 done!")
+)
 
 
 # def change(shouldIContinue2):
