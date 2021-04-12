@@ -1,14 +1,13 @@
 # import board
 # import neopixel
 from animations import twoDAnimations, lightAnimations
-from rx import of, subject, operators
+from rx import of, subject, operators, interval
 from rx.scheduler import ThreadPoolScheduler
 from threading import current_thread
 import time
 import multiprocessing
 import random
 
-shouldIContinueSubject = subject.BehaviorSubject(True)
 
 
 def intense_calculation(value):
@@ -20,6 +19,7 @@ def intense_calculation(value):
 # calculate number of CPUs, then create a ThreadPoolScheduler with that number of threads
 optimal_thread_count = multiprocessing.cpu_count()
 pool_scheduler = ThreadPoolScheduler(optimal_thread_count)
+shouldIContinueSubject = subject.BehaviorSubject(True)
 print("OPTIMAL THREADS: ", optimal_thread_count)
 
 
@@ -45,32 +45,32 @@ def function3(value):
 
 # Create Process 1
 shouldIContinueSubject.pipe(
-    operators.map(function1),
-    operators.subscribe_on(pool_scheduler)
-).subscribe(
+    operators.map(function1)
+    ).subscribe(
     on_next=lambda value: print("subscriber 1: ", value),
     on_error=lambda e: print(e),
-    on_completed=lambda: print("PROCESS 1 done!")
+    on_completed=lambda: print("PROCESS 1 done!"),
+    scheduler=operators.observe_on(pool_scheduler)
 )
 
 # operators.filter(function1, )
 # Create Process 2
 shouldIContinueSubject.pipe(
-    operators.map(function2),
-    operators.observe_on(pool_scheduler)
+    operators.map(function2)
 ).subscribe(
     on_next=lambda value: print("subscriber 2: ", value),
     on_error=lambda e: print(e),
-    on_completed=lambda: print("PROCESS 2 done!")
+    on_completed=lambda: print("PROCESS 2 done!"),
+    scheduler=operators.observe_on(pool_scheduler)
 )
 
 shouldIContinueSubject.pipe(
-    operators.map(function3),
-    operators.observe_on(pool_scheduler)
+    operators.map(function3)
 ).subscribe(
     on_next=lambda value: print("subscriber 3: ", value),
     on_error=lambda e: print(e),
-    on_completed=lambda: print("PROCESS 2 done!")
+    on_completed=lambda: print("PROCESS 2 done!"),
+    scheduler=operators.observe_on(pool_scheduler)
 )
 
 
@@ -87,6 +87,7 @@ shouldIContinueSubject.pipe(
 # shouldIContinueSubject.subscribe(change)
 # shouldIContinueSubject.subscribe(change2)
 for i in range(10000000):
+    print("ALL OBSERVERS: ", shouldIContinueSubject.observers)
     if(i == 8000):
         shouldIContinueSubject.on_next(False)
     if(i == 8001):
