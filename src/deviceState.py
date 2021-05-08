@@ -22,6 +22,8 @@ class StringLightsThing:
     }
     deviceShadowHandler = None
     myAWSIoTMQTTShadowClient = None
+    mqttConnection = None
+    pixelPaintTopic = "stringLights/pixelPaint"
     
     
 
@@ -37,6 +39,7 @@ class StringLightsThing:
     def initializeHandlerAndAwsClient(self, handler, client):
         self.deviceShadowHandler = handler
         self.myAWSIoTMQTTShadowClient = client
+        self.mqttConnection = client.getMQTTConnection()
 
     def updateReportedStateBasedOnDifferences(self, overallDifferenceDict):
         def dictLoopAndReplace(subDifferenceDict, reportedDict):
@@ -95,6 +98,10 @@ def connectDeviceAndListenForDiff():
     deviceShadowHandler.shadowRegisterDeltaCallback(shadowDeltaHandler)
 
 
+def pixelPaintOnMessage(client, userdata, message):
+    print("Message from pixelPaint: ", message)
+    payloadDict = json.loads(message)["payload"]
+
 def shadowDeltaHandler(payload, responseStatus, token):
     payloadDict = json.loads(payload)["state"]
     print("The Delta issssss : ", payloadDict)
@@ -121,6 +128,8 @@ def deviceStartup(deviceShadowHandler):
     deviceShadowHandler.shadowUpdate(
         connectJSONString, customShadowCallback_Update, CONST_TIMEOUT)
     deviceShadowHandler.shadowGet(loadDesiredState, CONST_TIMEOUT)
+    singletonDevice.mqttConnection.subscribe(singletonDevice.pixelPaintTopic, 0, pixelPaintOnMessage)
+
 
 def loadDesiredState(payload, responseStatus, token):
     payloadDict = json.loads(payload)
@@ -140,3 +149,9 @@ def customShadowCallback_Update(payload, responseStatus, token):
     #     print("~~~~~~~~~~~~~~~~~~~~~~~\n\n")
     # if responseStatus == "rejected":
     #     print("Update request " + token + " rejected!")
+
+# PIXEL PAINT LOGIC
+# 1. The desired state is always being changed asynchronously by updates to device state
+# 2. When updating desired state -> activeAnimation = "pixelPaint" keep activeAnimation always true and do not reset. Also fill the pixels with blank to start with a clean canvas.
+# 3. Separately becuase we are subsribed to topic stringLights/pixelPaint we will get updates whenever it fires
+#    During this callback check if the active animation is pixelPaint and then start running pixelPaint animation
