@@ -23,11 +23,6 @@ def scaleBrightnessOfColor(color, percentage):
     return tuple([percentage*x for x in color])
 
 
-
-
-
-
-
 # --------------------------2D--------------------------
 def translate2DPointTo1DPosition(x, y, xAxisLength):
 # The direction the light starts moving first is x direction

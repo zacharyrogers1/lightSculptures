@@ -103,22 +103,23 @@ class StringLightsThing:
 
     def runActiveAnimation(self):
         activeAnimation = self.reportedState["activeAnimation"]
+        brightness = self.reportedState["brightness"]
         if(activeAnimation == 'error'):
             lightAnimations.error(self.pixels)
         elif(activeAnimation == 'countdown'):
             countdownSettings = self.reportedState["animations"]["countdown"]
-            lightAnimations.countdown(self.pixels, countdownSettings["timeInSeconds"])
+            lightAnimations.countdown(self.pixels, countdownSettings["timeInSeconds"], brightness)
         elif(activeAnimation == 'pingPong'):
             pingPongSettings = self.reportedState["animations"]["pingPong"]
-            lightAnimations.pingPong(self.pixels, self.numPixels, pingPongSettings["speed"], pingPongSettings["color"])
+            lightAnimations.pingPong(self.pixels, self.numPixels, pingPongSettings["speed"], pingPongSettings["color"], brightness)
         elif(activeAnimation == 'unifiedRainbow'):
             unifiedRainbowSettings = self.reportedState["animations"]["unifiedRainbow"]
-            lightAnimations.unifiedRainbow(self.pixels, unifiedRainbowSettings["speed"])
+            lightAnimations.unifiedRainbow(self.pixels, unifiedRainbowSettings["speed"], brightness)
         elif(activeAnimation == 'chasingLights'):
             chasingLightsSettings = self.reportedState["animations"]["chasingLights"]
-            lightAnimations.chasingLights(self.pixels, self.numPixels, chasingLightsSettings["numLitPixels"], chasingLightsSettings["color"], chasingLightsSettings["speed"])
+            lightAnimations.chasingLights(self.pixels, self.numPixels, chasingLightsSettings["numLitPixels"], chasingLightsSettings["color"], chasingLightsSettings["speed"], brightness)
         elif(activeAnimation == 'pixelPaint'):
-            pixelPaint.pixelPaint(self.pixels, self.xAxisLength, self.pixelPaintUpdateList)
+            pixelPaint.pixelPaint(self.pixels, self.xAxisLength, self.pixelPaintUpdateList, brightness)
         else:
             print('NO ACTIVE ANIMATION FOUND FOR: ', activeAnimation)
 
