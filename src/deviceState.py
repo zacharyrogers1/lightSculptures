@@ -45,7 +45,7 @@ class StringLightsThing:
         self.myAWSIoTMQTTShadowClient = myAWSIoTMQTTShadowClient
         self.mqttConnection = mqttConnection
     
-    def updatedConnectedState():
+    def updatedConnectedState(self):
         connectJSONDict = {
             "state": {
                 "reported": {
