@@ -43,8 +43,8 @@ class StringLightsThing:
         self.mqttConnection.subscribe(self.pixelPaintTopic, 0, self.pixelPaintOnMessage)
     
     def pixelPaintOnMessage(self, client, userdata, message):
-        print("Message from pixelPaint: ", message)
-        payloadDict = json.loads(message)["payload"]
+        print("Message from pixelPaint: ", message.payload.decode('UTF-8'))
+        # payloadDict = json.loads(message)["payload"]
     
     def awsInitialization(self):
         (deviceShadowHandler, myAWSIoTMQTTShadowClient, mqttConnection) = initialAwsSetup()
