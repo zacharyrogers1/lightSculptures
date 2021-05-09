@@ -116,7 +116,8 @@ class StringLightsThing:
             chasingLightsSettings = self.reportedState["animations"]["chasingLights"]
             lightAnimations.chasingLights(self.pixels, self.num_pixels, chasingLightsSettings["numLitPixels"], chasingLightsSettings["color"], chasingLightsSettings["speed"])
         else:
-            print('NO ACTIVE ANIMATION FOUND FOR: ', activeAnimation)
+            return
+            # print('NO ACTIVE ANIMATION FOUND FOR: ', activeAnimation)
 
 
 singletonDevice = StringLightsThing()
