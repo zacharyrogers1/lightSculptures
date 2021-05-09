@@ -14,7 +14,7 @@ QoS_One = 1
 QoS_Two = 2
 
 class StringLightsThing:
-    num_pixels = 50
+    numPixels = 50
     xAxisLength = 10
     reportedState = {
         "activeAnimation": "error",
@@ -60,7 +60,9 @@ class StringLightsThing:
         connectJSONDict = {
             "state": {
                 "reported": {
-                    "connected": True
+                    "connected": True,
+                    "numPixels": self.numPixels,
+                    "xAxisLength": self.xAxisLength
                 }
             }
         }
@@ -108,13 +110,13 @@ class StringLightsThing:
             lightAnimations.countdown(self.pixels, countdownSettings["timeInSeconds"])
         elif(activeAnimation == 'pingPong'):
             pingPongSettings = self.reportedState["animations"]["pingPong"]
-            lightAnimations.pingPong(self.pixels, self.num_pixels, pingPongSettings["speed"], pingPongSettings["color"])
+            lightAnimations.pingPong(self.pixels, self.numPixels, pingPongSettings["speed"], pingPongSettings["color"])
         elif(activeAnimation == 'unifiedRainbow'):
             unifiedRainbowSettings = self.reportedState["animations"]["unifiedRainbow"]
             lightAnimations.unifiedRainbow(self.pixels, unifiedRainbowSettings["speed"])
         elif(activeAnimation == 'chasingLights'):
             chasingLightsSettings = self.reportedState["animations"]["chasingLights"]
-            lightAnimations.chasingLights(self.pixels, self.num_pixels, chasingLightsSettings["numLitPixels"], chasingLightsSettings["color"], chasingLightsSettings["speed"])
+            lightAnimations.chasingLights(self.pixels, self.numPixels, chasingLightsSettings["numLitPixels"], chasingLightsSettings["color"], chasingLightsSettings["speed"])
         elif(activeAnimation == 'pixelPaint'):
             pixelPaint.pixelPaint(self.pixels, self.xAxisLength, self.pixelPaintUpdateList)
         else:
