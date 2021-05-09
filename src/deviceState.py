@@ -107,7 +107,7 @@ singletonDevice = StringLightsThing()
 def connectDeviceAndListenForDiff():
     (deviceShadowHandler, myAWSIoTMQTTShadowClient) = doAllAwsSetup()
     singletonDevice.initializeHandlerAndAwsClient(deviceShadowHandler, myAWSIoTMQTTShadowClient)
-    singletonDevice.deviceStartup(deviceShadowHandler)
+    singletonDevice.deviceStartup()
 
 # def pixelPaintOnMessage(client, userdata, message):
 #     print("Message from pixelPaint: ", message)
