@@ -126,6 +126,7 @@ def loadDesiredState(payload, responseStatus, token):
     desiredPayloadDict = payloadDict["state"]["desired"]
 
     singletonDevice.reportedState = desiredPayloadDict
+    print("fetched Desired State ", singletonDevice.reportedState)
 
 # def customShadowCallback_Update(payload, responseStatus, token):
 #     return
