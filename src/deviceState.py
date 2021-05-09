@@ -22,6 +22,7 @@ class StringLightsThing:
     myAWSIoTMQTTShadowClient = None
     mqttConnection = None
     pixelPaintTopic = "stringLights/pixelPaint"
+    pixelPaintUpdateList = []
 
     def __init__(self):
         self.desiredState = {}
@@ -43,8 +44,11 @@ class StringLightsThing:
         self.mqttConnection.subscribe(self.pixelPaintTopic, 0, self.pixelPaintOnMessage)
     
     def pixelPaintOnMessage(self, client, userdata, message):
-        print("Message from pixelPaint: ", message.payload.decode('UTF-8'))
-        # payloadDict = json.loads(message)["payload"]
+        payload = message.payload.decode('UTF-8')
+        # print("Message from pixelPaint: ", payload)
+        pixelToUpdate = json.loads(payload)["pixelPaint"]
+        self.pixelPaintUpdateList.append(pixelToUpdate)
+        print("Update list: ", self.pixelPaintUpdateList)
     
     def awsInitialization(self):
         (deviceShadowHandler, myAWSIoTMQTTShadowClient, mqttConnection) = initialAwsSetup()
