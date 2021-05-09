@@ -32,6 +32,20 @@ class StringLightsThing:
             pixel_pin, num_pixels, auto_write=False, pixel_order=ORDER)
     
     def deviceStartup(self):
+        self.awsInitialization()
+        self.updatedConnectedState()
+
+        # self.mqttConnection.subscribe(singletonDevice.pixelPaintTopic, 0, pixelPaintOnMessage)
+        self.deviceShadowHandler.shadowGet(self.loadDesiredState, CONST_TIMEOUT)
+        self.deviceShadowHandler.shadowRegisterDeltaCallback(self.shadowDeltaHandler)
+    
+    def awsInitialization(self):
+        (deviceShadowHandler, myAWSIoTMQTTShadowClient, mqttConnection) = initialAwsSetup()
+        self.deviceShadowHandler = deviceShadowHandler
+        self.myAWSIoTMQTTShadowClient = myAWSIoTMQTTShadowClient
+        self.mqttConnection = mqttConnection
+    
+    def updatedConnectedState():
         connectJSONDict = {
             "state": {
                 "reported": {
@@ -42,14 +56,6 @@ class StringLightsThing:
         connectJSONString = json.dumps(connectJSONDict)
         self.deviceShadowHandler.shadowUpdate(
             connectJSONString, None, CONST_TIMEOUT)
-        self.deviceShadowHandler.shadowGet(self.loadDesiredState, CONST_TIMEOUT)
-        # self.mqttConnection.subscribe(singletonDevice.pixelPaintTopic, 0, pixelPaintOnMessage)
-        self.deviceShadowHandler.shadowRegisterDeltaCallback(self.shadowDeltaHandler)
-
-    def initializeHandlerAndAwsClient(self, handler, client, mqttConnection):
-        self.deviceShadowHandler = handler
-        self.myAWSIoTMQTTShadowClient = client
-        self.mqttConnection = mqttConnection
 
     def updateReportedStateBasedOnDifferences(self, overallDifferenceDict):
         def dictLoopAndReplace(subDifferenceDict, reportedDict):
@@ -110,8 +116,8 @@ singletonDevice = StringLightsThing()
 
 
 def connectDeviceAndListenForDiff():
-    (deviceShadowHandler, myAWSIoTMQTTShadowClient, mqttConnection) = initialAwsSetup()
-    singletonDevice.initializeHandlerAndAwsClient(deviceShadowHandler, myAWSIoTMQTTShadowClient, mqttConnection)
+    # (deviceShadowHandler, myAWSIoTMQTTShadowClient, mqttConnection) = initialAwsSetup()
+    # singletonDevice.initializeHandlerAndAwsClient(deviceShadowHandler, myAWSIoTMQTTShadowClient, mqttConnection)
     singletonDevice.deviceStartup()
 
 # def pixelPaintOnMessage(client, userdata, message):
@@ -120,20 +126,6 @@ def connectDeviceAndListenForDiff():
 
 def getActiveAnimationAndRun():
     singletonDevice.runActiveAnimation()
-
-
-
-# def customShadowCallback_Update(payload, responseStatus, token):
-#     return
-#     # if responseStatus == "timeout":
-#     #     print("Update request " + token + " time out!")
-#     # if responseStatus == "accepted":
-#     #     print("~~~~~~~~~~~~~~~~~~~~~~~")
-#     #     print(payload)
-#     #     print("Update request with token: " + token + " accepted!")
-#     #     print("~~~~~~~~~~~~~~~~~~~~~~~\n\n")
-#     # if responseStatus == "rejected":
-#     #     print("Update request " + token + " rejected!")
 
 # PIXEL PAINT LOGIC
 # 1. The desired state is always being changed asynchronously by updates to device state
