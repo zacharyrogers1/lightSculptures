@@ -47,7 +47,7 @@ class StringLightsThing:
             connectJSONString, None, CONST_TIMEOUT)
         self.deviceShadowHandler.shadowGet(self.loadDesiredState, CONST_TIMEOUT)
         # self.mqttConnection.subscribe(singletonDevice.pixelPaintTopic, 0, pixelPaintOnMessage)
-        self.deviceShadowHandler.shadowRegisterDeltaCallback(shadowDeltaHandler)
+        self.deviceShadowHandler.shadowRegisterDeltaCallback(self.shadowDeltaHandler)
 
     def initializeHandlerAndAwsClient(self, handler, client):
         self.deviceShadowHandler = handler
@@ -65,6 +65,11 @@ class StringLightsThing:
         self.updateReportedStateAfterSuccess()
         print("INTERRUPT: Setting Subject False", isAnimationActiveSubject.observers.length())
         # isAnimationActiveSubject.on_next(False)
+
+    def shadowDeltaHandler(self, payload, responseStatus, token):
+        payloadDict = json.loads(payload)["state"]
+        print("The Delta issssss : ", payloadDict)
+        self.updateReportedStateBasedOnDifferences(payloadDict)
     
     def updateReportedStateAfterSuccess(self):
         reportedJSONObj = {
@@ -81,12 +86,6 @@ class StringLightsThing:
 
         self.reportedState = desiredPayloadDict
         print("fetched Desired State ", self.reportedState)
-
-    # def runAnimationWhenStopped(self, isAnimationActive):
-    #     print("AlwaysChecking subscription: ", isAnimationActive)
-    #     if(isAnimationActive == False):
-    #         isAnimationActiveSubject.on_next(True)
-    #         self.runActiveAnimation()
 
     def runActiveAnimation(self):
         activeAnimation = self.reportedState["activeAnimation"]
@@ -119,11 +118,6 @@ def connectDeviceAndListenForDiff():
 # def pixelPaintOnMessage(client, userdata, message):
 #     print("Message from pixelPaint: ", message)
 #     payloadDict = json.loads(message)["payload"]
-
-def shadowDeltaHandler(payload, responseStatus, token):
-    payloadDict = json.loads(payload)["state"]
-    print("The Delta issssss : ", payloadDict)
-    singletonDevice.updateReportedStateBasedOnDifferences(payloadDict)
 
 def getActiveAnimationAndRun():
     singletonDevice.runActiveAnimation()
