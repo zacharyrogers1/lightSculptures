@@ -9,9 +9,10 @@ import multiprocessing
 import random
 
 def functionWhichPopsOff(aList):
-    aList.clear()
-    # theValue = aList.pop(0)
-    # print("removed value ", theValue)
+    while (len(aList) > 0):
+        someValue = aList.pop()
+        print("single value: ", someValue)
+
 
 someList = [1,2,3,4,5,6]
 
