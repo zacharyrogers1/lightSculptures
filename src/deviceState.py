@@ -94,10 +94,6 @@ class StringLightsThing:
 
         self.reportedState = desiredPayloadDict
         print("fetched Desired State ", self.reportedState)
-    
-    def pixelPaintOnMessage(self):
-        print("Message from pixelPaint: ", message)
-        payloadDict = json.loads(message)["payload"]
 
     def runActiveAnimation(self):
         activeAnimation = self.reportedState["activeAnimation"]
