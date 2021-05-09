@@ -14,7 +14,7 @@ QoS_Zero = 0
 QoS_One = 1
 QoS_Two = 2
 
-isAnimationActiveSubject = subject.BehaviorSubject(False)
+# isAnimationActiveSubject = subject.BehaviorSubject(False)
 class StringLightsThing:
     num_pixels = 50
     reportedState = {
@@ -24,8 +24,6 @@ class StringLightsThing:
     myAWSIoTMQTTShadowClient = None
     mqttConnection = None
     pixelPaintTopic = "stringLights/pixelPaint"
-    
-    
 
     def __init__(self):
         self.desiredState = {}
@@ -34,7 +32,22 @@ class StringLightsThing:
         ORDER = neopixel.RGB
         self.pixels = neopixel.NeoPixel(
             pixel_pin, num_pixels, auto_write=False, pixel_order=ORDER)
-        isAnimationActiveSubject.pipe(operators.delay(0.1)).subscribe(self.runAnimationWhenStopped)
+        # isAnimationActiveSubject.pipe(operators.delay(0.1)).subscribe(self.runAnimationWhenStopped)
+    
+    def deviceStartup(self):
+        connectJSONDict = {
+            "state": {
+                "reported": {
+                    "connected": True
+                }
+            }
+        }
+        connectJSONString = json.dumps(connectJSONDict)
+        self.deviceShadowHandler.shadowUpdate(
+            connectJSONString, None, CONST_TIMEOUT)
+        self.deviceShadowHandler.shadowGet(loadDesiredState, CONST_TIMEOUT)
+        # self.mqttConnection.subscribe(singletonDevice.pixelPaintTopic, 0, pixelPaintOnMessage)
+        self.deviceShadowHandler.shadowRegisterDeltaCallback(shadowDeltaHandler)
 
     def initializeHandlerAndAwsClient(self, handler, client):
         self.deviceShadowHandler = handler
@@ -51,7 +64,7 @@ class StringLightsThing:
         dictLoopAndReplace(overallDifferenceDict, self.reportedState)
         self.updateReportedStateAfterSuccess()
         print("INTERRUPT: Setting Subject False", isAnimationActiveSubject.observers.length())
-        isAnimationActiveSubject.on_next(False)
+        # isAnimationActiveSubject.on_next(False)
     
     def updateReportedStateAfterSuccess(self):
         reportedJSONObj = {
@@ -60,13 +73,13 @@ class StringLightsThing:
             }
         }
         reportJson = json.dumps(reportedJSONObj)
-        self.deviceShadowHandler.shadowUpdate(reportJson, customShadowCallback_Update, CONST_TIMEOUT)
+        self.deviceShadowHandler.shadowUpdate(reportJson, None, CONST_TIMEOUT)
 
-    def runAnimationWhenStopped(self, isAnimationActive):
-        print("AlwaysChecking subscription: ", isAnimationActive)
-        if(isAnimationActive == False):
-            isAnimationActiveSubject.on_next(True)
-            self.runActiveAnimation()
+    # def runAnimationWhenStopped(self, isAnimationActive):
+    #     print("AlwaysChecking subscription: ", isAnimationActive)
+    #     if(isAnimationActive == False):
+    #         isAnimationActiveSubject.on_next(True)
+    #         self.runActiveAnimation()
 
     def runActiveAnimation(self):
         activeAnimation = self.reportedState["activeAnimation"]
@@ -80,7 +93,7 @@ class StringLightsThing:
             lightAnimations.pingPong(self.pixels, self.num_pixels, pingPongSettings["speed"], pingPongSettings["color"])
         elif(activeAnimation == 'unifiedRainbow'):
             unifiedRainbowSettings = self.reportedState["animations"]["unifiedRainbow"]
-            lightAnimations.unifiedRainbow(self.pixels, unifiedRainbowSettings["speed"], isAnimationActiveSubject)
+            lightAnimations.unifiedRainbow(self.pixels, unifiedRainbowSettings["speed"])
         elif(activeAnimation == 'chasingLights'):
             chasingLightsSettings = self.reportedState["animations"]["chasingLights"]
             lightAnimations.chasingLights(self.pixels, self.num_pixels, chasingLightsSettings["numLitPixels"], chasingLightsSettings["color"], chasingLightsSettings["speed"])
@@ -94,13 +107,11 @@ singletonDevice = StringLightsThing()
 def connectDeviceAndListenForDiff():
     (deviceShadowHandler, myAWSIoTMQTTShadowClient) = doAllAwsSetup()
     singletonDevice.initializeHandlerAndAwsClient(deviceShadowHandler, myAWSIoTMQTTShadowClient)
-    deviceStartup(deviceShadowHandler)
-    deviceShadowHandler.shadowRegisterDeltaCallback(shadowDeltaHandler)
+    singletonDevice.deviceStartup(deviceShadowHandler)
 
-
-def pixelPaintOnMessage(client, userdata, message):
-    print("Message from pixelPaint: ", message)
-    payloadDict = json.loads(message)["payload"]
+# def pixelPaintOnMessage(client, userdata, message):
+#     print("Message from pixelPaint: ", message)
+#     payloadDict = json.loads(message)["payload"]
 
 def shadowDeltaHandler(payload, responseStatus, token):
     payloadDict = json.loads(payload)["state"]
@@ -110,45 +121,23 @@ def shadowDeltaHandler(payload, responseStatus, token):
 def getActiveAnimationAndRun():
     singletonDevice.runActiveAnimation()
 
-
-def deviceStartup(deviceShadowHandler):
-    # deviceShadowHandler.shadowGet(srcCallback = customShadowCallback_Update, srcTimeout = 5)
-    # On device startup the device should:
-    # 1. Set its connected attribute in reported to true
-    # 2. Perform a shadow get to see what the desired state of the device is.
-    # 3. Pass the desired state of the device into the reported state
-    connectJSONDict = {
-        "state": {
-            "reported": {
-                "connected": True
-            }
-        }
-    }
-    connectJSONString = json.dumps(connectJSONDict)
-    deviceShadowHandler.shadowUpdate(
-        connectJSONString, customShadowCallback_Update, CONST_TIMEOUT)
-    deviceShadowHandler.shadowGet(loadDesiredState, CONST_TIMEOUT)
-    singletonDevice.mqttConnection.subscribe(singletonDevice.pixelPaintTopic, 0, pixelPaintOnMessage)
-
-
 def loadDesiredState(payload, responseStatus, token):
     payloadDict = json.loads(payload)
     desiredPayloadDict = payloadDict["state"]["desired"]
 
     singletonDevice.reportedState = desiredPayloadDict
 
-
-def customShadowCallback_Update(payload, responseStatus, token):
-    return
-    # if responseStatus == "timeout":
-    #     print("Update request " + token + " time out!")
-    # if responseStatus == "accepted":
-    #     print("~~~~~~~~~~~~~~~~~~~~~~~")
-    #     print(payload)
-    #     print("Update request with token: " + token + " accepted!")
-    #     print("~~~~~~~~~~~~~~~~~~~~~~~\n\n")
-    # if responseStatus == "rejected":
-    #     print("Update request " + token + " rejected!")
+# def customShadowCallback_Update(payload, responseStatus, token):
+#     return
+#     # if responseStatus == "timeout":
+#     #     print("Update request " + token + " time out!")
+#     # if responseStatus == "accepted":
+#     #     print("~~~~~~~~~~~~~~~~~~~~~~~")
+#     #     print(payload)
+#     #     print("Update request with token: " + token + " accepted!")
+#     #     print("~~~~~~~~~~~~~~~~~~~~~~~\n\n")
+#     # if responseStatus == "rejected":
+#     #     print("Update request " + token + " rejected!")
 
 # PIXEL PAINT LOGIC
 # 1. The desired state is always being changed asynchronously by updates to device state
