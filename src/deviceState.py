@@ -1,5 +1,5 @@
 from awsShadow.awsSetup import initialAwsSetup
-from animations import lightAnimations
+from animations import lightAnimations, pixelPaint
 import board
 import neopixel
 import json
@@ -15,6 +15,7 @@ QoS_Two = 2
 
 class StringLightsThing:
     num_pixels = 50
+    xAxisLength = 10
     reportedState = {
         "activeAnimation": "error",
     }
@@ -115,9 +116,11 @@ class StringLightsThing:
         elif(activeAnimation == 'chasingLights'):
             chasingLightsSettings = self.reportedState["animations"]["chasingLights"]
             lightAnimations.chasingLights(self.pixels, self.num_pixels, chasingLightsSettings["numLitPixels"], chasingLightsSettings["color"], chasingLightsSettings["speed"])
+        elif(activeAnimation == 'pixelPaint'):
+            pixelPaint.pixelPaint(self.pixels, self.xAxisLength, self.pixelPaintUpdateList)
+            print("After Paint list: ", self.pixelPaintUpdateList)
         else:
-            return
-            # print('NO ACTIVE ANIMATION FOUND FOR: ', activeAnimation)
+            print('NO ACTIVE ANIMATION FOUND FOR: ', activeAnimation)
 
 
 singletonDevice = StringLightsThing()
