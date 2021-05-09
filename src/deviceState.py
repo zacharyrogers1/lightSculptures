@@ -34,10 +34,17 @@ class StringLightsThing:
     def deviceStartup(self):
         self.awsInitialization()
         self.updatedConnectedState()
+        self.listenForPixelPaintUpdate()
 
-        # self.mqttConnection.subscribe(singletonDevice.pixelPaintTopic, 0, pixelPaintOnMessage)
         self.deviceShadowHandler.shadowGet(self.loadDesiredState, CONST_TIMEOUT)
         self.deviceShadowHandler.shadowRegisterDeltaCallback(self.shadowDeltaHandler)
+
+    def listenForPixelPaintUpdate(self):
+        self.mqttConnection.subscribe(self.pixelPaintTopic, 0, self.pixelPaintOnMessage)
+    
+    def pixelPaintOnMessage(self, client, userdata, message):
+        print("Message from pixelPaint: ", message)
+        payloadDict = json.loads(message)["payload"]
     
     def awsInitialization(self):
         (deviceShadowHandler, myAWSIoTMQTTShadowClient, mqttConnection) = initialAwsSetup()
@@ -114,15 +121,8 @@ class StringLightsThing:
 
 singletonDevice = StringLightsThing()
 
-
 def connectDeviceAndListenForDiff():
-    # (deviceShadowHandler, myAWSIoTMQTTShadowClient, mqttConnection) = initialAwsSetup()
-    # singletonDevice.initializeHandlerAndAwsClient(deviceShadowHandler, myAWSIoTMQTTShadowClient, mqttConnection)
     singletonDevice.deviceStartup()
-
-# def pixelPaintOnMessage(client, userdata, message):
-#     print("Message from pixelPaint: ", message)
-#     payloadDict = json.loads(message)["payload"]
 
 def getActiveAnimationAndRun():
     singletonDevice.runActiveAnimation()
