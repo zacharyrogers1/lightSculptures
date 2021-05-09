@@ -45,7 +45,7 @@ class StringLightsThing:
         connectJSONString = json.dumps(connectJSONDict)
         self.deviceShadowHandler.shadowUpdate(
             connectJSONString, None, CONST_TIMEOUT)
-        self.deviceShadowHandler.shadowGet(loadDesiredState, CONST_TIMEOUT)
+        self.deviceShadowHandler.shadowGet(self.loadDesiredState, CONST_TIMEOUT)
         # self.mqttConnection.subscribe(singletonDevice.pixelPaintTopic, 0, pixelPaintOnMessage)
         self.deviceShadowHandler.shadowRegisterDeltaCallback(shadowDeltaHandler)
 
@@ -74,6 +74,13 @@ class StringLightsThing:
         }
         reportJson = json.dumps(reportedJSONObj)
         self.deviceShadowHandler.shadowUpdate(reportJson, None, CONST_TIMEOUT)
+    
+    def loadDesiredState(self, payload, responseStatus, token):
+        payloadDict = json.loads(payload)
+        desiredPayloadDict = payloadDict["state"]["desired"]
+
+        self.reportedState = desiredPayloadDict
+        print("fetched Desired State ", self.reportedState)
 
     # def runAnimationWhenStopped(self, isAnimationActive):
     #     print("AlwaysChecking subscription: ", isAnimationActive)
@@ -121,12 +128,7 @@ def shadowDeltaHandler(payload, responseStatus, token):
 def getActiveAnimationAndRun():
     singletonDevice.runActiveAnimation()
 
-def loadDesiredState(payload, responseStatus, token):
-    payloadDict = json.loads(payload)
-    desiredPayloadDict = payloadDict["state"]["desired"]
 
-    singletonDevice.reportedState = desiredPayloadDict
-    print("fetched Desired State ", singletonDevice.reportedState)
 
 # def customShadowCallback_Update(payload, responseStatus, token):
 #     return
