@@ -1,9 +1,8 @@
-from awsShadow.awsSetup import doAllAwsSetup
+from awsShadow.awsSetup import initialAwsSetup
 from animations import lightAnimations
 import board
 import neopixel
 import json
-from rx import of, subject, operators
 import time
 
 CONST_TIMEOUT = 5
@@ -14,7 +13,6 @@ QoS_Zero = 0
 QoS_One = 1
 QoS_Two = 2
 
-# isAnimationActiveSubject = subject.BehaviorSubject(False)
 class StringLightsThing:
     num_pixels = 50
     reportedState = {
@@ -32,7 +30,6 @@ class StringLightsThing:
         ORDER = neopixel.RGB
         self.pixels = neopixel.NeoPixel(
             pixel_pin, num_pixels, auto_write=False, pixel_order=ORDER)
-        # isAnimationActiveSubject.pipe(operators.delay(0.1)).subscribe(self.runAnimationWhenStopped)
     
     def deviceStartup(self):
         connectJSONDict = {
@@ -49,10 +46,10 @@ class StringLightsThing:
         # self.mqttConnection.subscribe(singletonDevice.pixelPaintTopic, 0, pixelPaintOnMessage)
         self.deviceShadowHandler.shadowRegisterDeltaCallback(self.shadowDeltaHandler)
 
-    def initializeHandlerAndAwsClient(self, handler, client):
+    def initializeHandlerAndAwsClient(self, handler, client, mqttConnection):
         self.deviceShadowHandler = handler
         self.myAWSIoTMQTTShadowClient = client
-        self.mqttConnection = client.getMQTTConnection()
+        self.mqttConnection = mqttConnection
 
     def updateReportedStateBasedOnDifferences(self, overallDifferenceDict):
         def dictLoopAndReplace(subDifferenceDict, reportedDict):
@@ -63,8 +60,6 @@ class StringLightsThing:
                     reportedDict[key] = value
         dictLoopAndReplace(overallDifferenceDict, self.reportedState)
         self.updateReportedStateAfterSuccess()
-        # print("INTERRUPT: Setting Subject False", isAnimationActiveSubject.observers.length())
-        # isAnimationActiveSubject.on_next(False)
 
     def shadowDeltaHandler(self, payload, responseStatus, token):
         payloadDict = json.loads(payload)["state"]
@@ -86,6 +81,10 @@ class StringLightsThing:
 
         self.reportedState = desiredPayloadDict
         print("fetched Desired State ", self.reportedState)
+    
+    def pixelPaintOnMessage(self):
+        print("Message from pixelPaint: ", message)
+        payloadDict = json.loads(message)["payload"]
 
     def runActiveAnimation(self):
         activeAnimation = self.reportedState["activeAnimation"]
@@ -111,8 +110,8 @@ singletonDevice = StringLightsThing()
 
 
 def connectDeviceAndListenForDiff():
-    (deviceShadowHandler, myAWSIoTMQTTShadowClient) = doAllAwsSetup()
-    singletonDevice.initializeHandlerAndAwsClient(deviceShadowHandler, myAWSIoTMQTTShadowClient)
+    (deviceShadowHandler, myAWSIoTMQTTShadowClient, mqttConnection) = initialAwsSetup()
+    singletonDevice.initializeHandlerAndAwsClient(deviceShadowHandler, myAWSIoTMQTTShadowClient, mqttConnection)
     singletonDevice.deviceStartup()
 
 # def pixelPaintOnMessage(client, userdata, message):

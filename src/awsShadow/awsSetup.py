@@ -34,11 +34,9 @@ def initialAwsSetup():
     # Connect to AWS IoT
     myAWSIoTMQTTShadowClient.connect()
 
-    # Create a deviceShadow with persistent subscription
+    # Create handler and mqtt connection
     deviceShadowHandler = myAWSIoTMQTTShadowClient.createShadowHandlerWithName(
         thingName, True)
-    return (deviceShadowHandler, myAWSIoTMQTTShadowClient)
+    mqttConnection = myAWSIoTMQTTShadowClient.getMQTTConnection()
 
-def doAllAwsSetup():
-    (deviceShadowHandler,myAWSIoTMQTTShadowClient) = initialAwsSetup()
-    return (deviceShadowHandler, myAWSIoTMQTTShadowClient)
+    return (deviceShadowHandler, myAWSIoTMQTTShadowClient, mqttConnection)
