@@ -46,7 +46,6 @@ class StringLightsThing:
     
     def pixelPaintOnMessage(self, client, userdata, message):
         payload = message.payload.decode('UTF-8')
-        # print("Message from pixelPaint: ", payload)
         pixelToUpdate = json.loads(payload)["pixelPaint"]
         self.pixelPaintUpdateList.append(pixelToUpdate)
         print("Update list: ", self.pixelPaintUpdateList)
@@ -118,7 +117,6 @@ class StringLightsThing:
             lightAnimations.chasingLights(self.pixels, self.num_pixels, chasingLightsSettings["numLitPixels"], chasingLightsSettings["color"], chasingLightsSettings["speed"])
         elif(activeAnimation == 'pixelPaint'):
             pixelPaint.pixelPaint(self.pixels, self.xAxisLength, self.pixelPaintUpdateList)
-            print("After Paint list: ", self.pixelPaintUpdateList)
         else:
             print('NO ACTIVE ANIMATION FOUND FOR: ', activeAnimation)
 
