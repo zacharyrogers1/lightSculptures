@@ -63,7 +63,7 @@ def chasingLights(pixels, num_pixels, numLitPixels, color, speed, brightness):
             thePercentage = (numLitPixels - LitPixel) / numLitPixels
             scaledBrightnessValue = animationHelpers.scaleBrightnessOfColor(color, thePercentage)
             doubleScaled =  animationHelpers.scaleBrightnessOfColor(scaledBrightnessValue, brightness)
-            pixels[currentPixel-LitPixel] = scaledBrightnessValue
+            pixels[currentPixel-LitPixel] = doubleScaled
         pixels.show()
         time.sleep(actualSleepInterval)
 
