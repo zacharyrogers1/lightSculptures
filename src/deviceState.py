@@ -46,8 +46,8 @@ class StringLightsThing:
     
     def pixelPaintOnMessage(self, client, userdata, message):
         payload = message.payload.decode('UTF-8')
-        pixelToUpdate = json.loads(payload)["pixelPaint"]
-        self.pixelPaintUpdateList.append(pixelToUpdate)
+        pixelsToUpdate = json.loads(payload)["pixelPaint"]
+        self.pixelPaintUpdateList.extend(pixelsToUpdate)
         print("Update list: ", self.pixelPaintUpdateList)
     
     def awsInitialization(self):
