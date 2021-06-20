@@ -6,5 +6,6 @@ num_pixels = 50
 ORDER = neopixel.RGB
 pixels = neopixel.NeoPixel(pixel_pin, num_pixels, auto_write=False, pixel_order=ORDER)
 pixels.brightness = 1.0
-pixels.fill((255,0,0))
-pixels.show()
+while(True):
+    pixels.fill((255,0,0))
+    pixels.show()
