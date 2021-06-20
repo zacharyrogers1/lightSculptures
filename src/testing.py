@@ -1,24 +1,10 @@
-# import board
-# import neopixel
-from animations import twoDAnimations, lightAnimations
-from rx import of, subject, operators, interval
-from rx.scheduler import ThreadPoolScheduler
-from threading import current_thread
-import time
-import multiprocessing
-import random
-
-def functionWhichPopsOff(aList):
-    while (len(aList) > 0):
-        someValue = aList.pop()
-        print("single value: ", someValue)
-
-
-someList = [1,2,3,4,5,6]
-
-functionWhichPopsOff(someList)
-
-print(someList)
-
-
-
+import board
+import neopixel       
+       
+pixel_pin = board.D18
+num_pixels = 50
+ORDER = neopixel.RGB
+pixels = neopixel.NeoPixel(pixel_pin, num_pixels, auto_write=False, pixel_order=ORDER)
+pixels.brightness = 1.0
+pixels.fill((255,0,0))
+pixels.show()

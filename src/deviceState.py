@@ -3,7 +3,6 @@ from animations import lightAnimations, pixelPaint
 import board
 import neopixel
 import json
-import time
 
 CONST_TIMEOUT = 5
 CONST_baseReconnectQuietTimeSecond = 1
