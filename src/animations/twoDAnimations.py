@@ -12,6 +12,7 @@ def scanningStripe(pixels, xAxisLength, speed, color):
     for x in range (xAxisLength):
         for y in range(yAxisLength):
             screen[x][y] = color
+            screen[xAxisLength-x-1][y] = color
         animationHelpers.show2DimensionalDisplay(pixels, screen)
         screen = animationHelpers.createBlankScreen(xAxisLength, yAxisLength)
         time.sleep(normalizedSpeed)
