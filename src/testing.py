@@ -10,6 +10,8 @@ pixels.brightness = 0.5
 while(True):
     # lightAnimations.twinkle(pixels, num_pixels, 0.0, (255,0,0))
     pixels = [(255,0,0), (255,0,0), (255,0,0)]
+    pixels.show()
+    # pixels[0] = (255,0,0)
 
 
 # import math
