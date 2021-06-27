@@ -86,11 +86,11 @@ def twinkle(pixels, num_pixels, speed, color):
         actualBrightness = [brightnessEquation(brightness, stepSize, i) for brightness in brightnessSeeds]
         # for j in range(num_pixels):
         #     scaledColor = animationHelpers.scaleBrightnessOfColor(color, actualBrightness[j])
-        #     pixelStart = time.time()
-        #     pixels[j] = scaledColor
-        #     pixelSetTime = pixelSetTime + time.time() - pixelStart
+        pixelStart = time.time()
         pixelsTuple = [animationHelpers.scaleBrightnessOfColor(color, x) for x in actualBrightness]
         pixels[:num_pixels] = pixelsTuple
+        pixelSetTime = pixelSetTime + time.time() - pixelStart
+
         pixelStart = time.time()
         pixels.show()
         pixelShowTime = pixelShowTime + time.time() - pixelStart
