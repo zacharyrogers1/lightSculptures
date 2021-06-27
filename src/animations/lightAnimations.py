@@ -110,7 +110,7 @@ def twinklePreCalc(pixels, num_pixels, speed, color):
             pixelsTuple.append(scaledColor)
         pixels.show()
     endTime = time.time()
-    total = start-endTime
+    total = endTime-start
     print("TotalTime: ", total)
 
 
