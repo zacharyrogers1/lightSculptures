@@ -89,12 +89,14 @@ def twinkle(pixels, num_pixels, speed, color):
             pixelStart = time.time()
             pixels[j] = scaledColor
             pixelSetTime = pixelSetTime + time.time() - pixelStart
+        # pixelsTuple = [animationHelpers.scaleBrightnessOfColor(color, actualBrightness[x]) for x in actualBrightness]
+        # pixels[:num_pixels] = []
         pixelStart = time.time()
         pixels.show()
         pixelShowTime = pixelShowTime + time.time() - pixelStart
     end = time.time()
     total = end-start
-    print("Pixel Show: ", pixelShowTime/total, " |||||||| ", pixelSetTime/total)
+    print("Pixel Show: ", pixelShowTime/total, " |||||||| pixelSetTime: ", pixelSetTime/total, " ||||||| absolute Time: ", total)
 
     #All lights start with some brightness between 0-1 randomly. They will all take a number of steps to go from 
     # 0.5 ->0.6 -> 0.7... 1.0 -> 0.9 -> ...0.1 -> 0.0 ->0.1 ... 0.5
