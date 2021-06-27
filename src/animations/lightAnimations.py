@@ -74,7 +74,7 @@ def twinkle(pixels, num_pixels, speed, color):
         return (math.cos(brightness + stepSize*iterator) + 1)*0.5
 
     brightnessSeeds = [random.random()*2*math.pi for i in range(num_pixels)]
-    numberOfSteps = 20
+    numberOfSteps = 50
     stepSize = 2.0*math.pi/numberOfSteps
     for i in range(numberOfSteps + 1):
         actualBrightness = [brightnessEquation(brightness, stepSize, i) for brightness in brightnessSeeds]
