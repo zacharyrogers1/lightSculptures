@@ -20,7 +20,7 @@ def wheel(pos):
     return (pos * 3, 0, 255 - pos * 3)
 
 def scaleBrightnessOfColor(color, percentage):
-    return tuple([percentage*x for x in color])
+    return tuple([int(percentage*x) for x in color])
 
 
 # --------------------------2D--------------------------
