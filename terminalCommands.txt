@@ -1,0 +1,8 @@
+If running into: "Could not resolve hostname raspberrypi:"
+    - ~sudo killall -HUP mDNSResponder~
+
+To see all running processes on UNIX
+    ~ps aux~
+
+To kill a processes. Find PID of process and enter in below command
+    ~sudo kill 3374~
