@@ -101,6 +101,7 @@ def twinklePreCalc(pixels, num_pixels, speed, color):
     numberOfSteps = minimumSteps + int((maximumSteps-minimumSteps)*speed)
 
     if(brightnessLookup == None):
+        print("Calculate all seeds")
         brightnessLookup = [float(x)/numberOfSteps for x in range(numberOfSteps)]
         startingPoints = [random.randint(0, numberOfSteps-1) for x in range(num_pixels)]
 
@@ -113,6 +114,7 @@ def twinklePreCalc(pixels, num_pixels, speed, color):
             brightness = brightnessLookup[newSpot]
             scaledColor = animationHelpers.scaleBrightnessOfColor(color, brightness)
             pixelsTuple.append(scaledColor)
+        pixels[:num_pixels] = pixelsTuple
         pixels.show()
     endTime = time.time()
     total = endTime-start
