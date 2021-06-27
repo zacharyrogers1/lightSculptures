@@ -78,9 +78,9 @@ def twinkle(pixels, num_pixels, speed, color):
     if(brightnessSeeds == None):
         brightnessSeeds = [random.random()*2*math.pi for i in range(num_pixels)]
 
-    numberOfSteps = 20
+    numberOfSteps = 40
     stepSize = 2.0*math.pi/numberOfSteps
-    for i in range(numberOfSteps + 1):
+    for i in range(numberOfSteps):
         actualBrightness = [brightnessEquation(brightness, stepSize, i) for brightness in brightnessSeeds]
         for j in range(num_pixels):
             scaledColor = animationHelpers.scaleBrightnessOfColor(color, actualBrightness[j])
