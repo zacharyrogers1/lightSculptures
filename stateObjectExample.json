@@ -15,6 +15,10 @@
         "unifiedRainbow": {
             "speed": 0.7
         },
+        "twinkle": {
+            "speed": 0.7,
+            "color": [255,0,0]
+        },
         "chasingLights": {
             "speed": 0.1,
             "numLitPixels": 7,
