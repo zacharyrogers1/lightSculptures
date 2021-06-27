@@ -70,6 +70,7 @@ def chasingLights(pixels, num_pixels, numLitPixels, color, speed):
 brightnessSeeds = None
 def twinkle(pixels, num_pixels, speed, color):
     global brightnessSeeds
+    start = time.time()
     minimumSteps = 5
     maximumSteps = 500
     def brightnessEquation(brightness, stepSize, iterator):
@@ -84,6 +85,10 @@ def twinkle(pixels, num_pixels, speed, color):
         pixelsTuple = [animationHelpers.scaleBrightnessOfColor(color, x) for x in actualBrightness]
         pixels[:num_pixels] = pixelsTuple
         pixels.show()
+    endTime = time.time()
+    total = endTime - start
+    print("TotalTime: ", total)
+
 
 brightnessLookup = None
 startingPoints = None
