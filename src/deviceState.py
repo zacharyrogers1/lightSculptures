@@ -1,5 +1,5 @@
 from awsShadow.awsSetup import initialAwsSetup
-from animations import lightAnimations, pixelPaint
+from animations import lightAnimations, pixelPaint, twoDAnimations
 import board
 import neopixel
 import json
@@ -110,16 +110,19 @@ class StringLightsThing:
             lightAnimations.countdown(self.pixels, countdownSettings["timeInSeconds"])
         elif(activeAnimation == 'pingPong'):
             pingPongSettings = self.reportedState["animations"]["pingPong"]
-            lightAnimations.pingPong(self.pixels, self.numPixels, pingPongSettings["speed"], pingPongSettings["color"])
+            lightAnimations.pingPong(self.pixels, pingPongSettings["speed"], pingPongSettings["color"])
         elif(activeAnimation == 'unifiedRainbow'):
-            twinkleSettings = self.reportedState["animations"]["unifiedRainbow"]
-            lightAnimations.unifiedRainbow(self.pixels, twinkleSettings["speed"])
+            unifiedRainbowSettings = self.reportedState["animations"]["unifiedRainbow"]
+            lightAnimations.unifiedRainbow(self.pixels, unifiedRainbowSettings["speed"])
         elif(activeAnimation == 'twinkle'):
             twinkleSettings = self.reportedState["animations"]["twinkle"]
-            lightAnimations.twinkle(self.pixels, self.numPixels, twinkleSettings["speed"], twinkleSettings["color"])
+            lightAnimations.twinkle(self.pixels, twinkleSettings["speed"], twinkleSettings["color"])
+        elif(activeAnimation == 'scanningStripe'):
+            scanningStripeSettings = self.reportedState["animations"]["scanningStripe"]
+            twoDAnimations.scanningStripe(self.pixels, self.xAxisLength, scanningStripeSettings["speed"], scanningStripeSettings["color"])
         elif(activeAnimation == 'chasingLights'):
             chasingLightsSettings = self.reportedState["animations"]["chasingLights"]
-            lightAnimations.chasingLights(self.pixels, self.numPixels, chasingLightsSettings["numLitPixels"], chasingLightsSettings["color"], chasingLightsSettings["speed"])
+            lightAnimations.chasingLights(self.pixels, chasingLightsSettings["numLitPixels"], chasingLightsSettings["color"], chasingLightsSettings["speed"])
         elif(activeAnimation == 'pixelPaint'):
             pixelPaint.pixelPaint(self.pixels, self.xAxisLength, self.pixelPaintUpdateList)
         else:

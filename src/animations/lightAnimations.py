@@ -12,12 +12,13 @@ def countdown(pixels, timeInSeconds):
         pixels.show()
         time.sleep(stepInterval)
 
-def pingPong(pixels, num_pixels, speed, color):
+def pingPong(pixels, speed, color):
     maxSleepInterval = 0.1
 
     actualSleepInterval = animationHelpers.getNormalizedSpeed(speed, maxSleepInterval)
     pixels.fill((0,0,0))
     pixels.show()
+    num_pixels = pixels.n
     for i in range(num_pixels):
         if(i == 0):
             pixels[i] = color
@@ -46,7 +47,7 @@ def unifiedRainbow(pixels, speed):
         pixels.show()
         time.sleep(actualSleepInterval)
 
-def chasingLights(pixels, num_pixels, numLitPixels, color, speed):
+def chasingLights(pixels, numLitPixels, color, speed):
 
     def determineNumberTrailingPixels(currentPixel, numLitPixels):
         if(currentPixel < numLitPixels):
@@ -58,6 +59,7 @@ def chasingLights(pixels, num_pixels, numLitPixels, color, speed):
     actualSleepInterval = animationHelpers.getNormalizedSpeed(speed,maxSleepInterval)
     pixels.fill((0,0,0))
     pixels.show()
+    num_pixels = pixels.n
     for currentPixel in range(num_pixels):
         numTrailingPixels = determineNumberTrailingPixels(currentPixel, numLitPixels)
         for LitPixel in range(numTrailingPixels + 1):
@@ -68,10 +70,11 @@ def chasingLights(pixels, num_pixels, numLitPixels, color, speed):
         time.sleep(actualSleepInterval)
 
 brightnessSeeds = None
-def twinkle(pixels, num_pixels, speed, color):
+def twinkle(pixels, speed, color):
     global brightnessSeeds
     minimumSteps = 5
     maximumSteps = 500
+    num_pixels = pixels.n
     def brightnessEquation(brightness, stepSize, iterator):
         return (math.cos(brightness + stepSize*iterator) + 1)*0.5
     if(brightnessSeeds == None):
