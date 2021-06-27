@@ -87,16 +87,12 @@ def twinkle(pixels, num_pixels, speed, color):
         # for j in range(num_pixels):
         #     scaledColor = animationHelpers.scaleBrightnessOfColor(color, actualBrightness[j])
         pixelsTuple = [animationHelpers.scaleBrightnessOfColor(color, x) for x in actualBrightness]
-        pixelStart = time.time()
         pixels[:num_pixels] = pixelsTuple
-        pixelSetTime = pixelSetTime + time.time() - pixelStart
 
-        pixelStart = time.time()
         pixels.show()
-        pixelShowTime = pixelShowTime + time.time() - pixelStart
     end = time.time()
     total = end-start
-    print("Pixel Show: ", pixelShowTime/total, " |||||||| pixelSetTime: ", pixelSetTime/total, " ||||||| absolute Time: ", total)
+    print("absolute Time: ", total)
 
 def twinkleIndividual(pixels, num_pixels, speed, color):
     global brightnessSeeds
@@ -116,16 +112,12 @@ def twinkleIndividual(pixels, num_pixels, speed, color):
         actualBrightness = [brightnessEquation(brightness, stepSize, i) for brightness in brightnessSeeds]
         for j in range(num_pixels):
             scaledColor = animationHelpers.scaleBrightnessOfColor(color, actualBrightness[j])
-            pixelStart = time.time()
             pixels[j] = scaledColor
-            pixelSetTime = pixelSetTime + time.time() - pixelStart
 
-        pixelStart = time.time()
         pixels.show()
-        pixelShowTime = pixelShowTime + time.time() - pixelStart
     end = time.time()
     total = end-start
-    print("Pixel Show: ", pixelShowTime/total, " |||||||| pixelSetTime: ", pixelSetTime/total, " ||||||| absolute Time: ", total)
+    print("absolute Time: ", total)
 
     #All lights start with some brightness between 0-1 randomly. They will all take a number of steps to go from 
     # 0.5 ->0.6 -> 0.7... 1.0 -> 0.9 -> ...0.1 -> 0.0 ->0.1 ... 0.5
