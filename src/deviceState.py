@@ -112,8 +112,11 @@ class StringLightsThing:
             pingPongSettings = self.reportedState["animations"]["pingPong"]
             lightAnimations.pingPong(self.pixels, self.numPixels, pingPongSettings["speed"], pingPongSettings["color"])
         elif(activeAnimation == 'unifiedRainbow'):
-            unifiedRainbowSettings = self.reportedState["animations"]["unifiedRainbow"]
-            lightAnimations.unifiedRainbow(self.pixels, unifiedRainbowSettings["speed"])
+            twinkleSettings = self.reportedState["animations"]["unifiedRainbow"]
+            lightAnimations.unifiedRainbow(self.pixels, twinkleSettings["speed"])
+        elif(activeAnimation == 'twinkle'):
+            twinkleSettings = self.reportedState["animations"]["twinkle"]
+            lightAnimations.twinkle(self.pixels, self.numPixels, twinkleSettings["speed"], twinkleSettings["color"])
         elif(activeAnimation == 'chasingLights'):
             chasingLightsSettings = self.reportedState["animations"]["chasingLights"]
             lightAnimations.chasingLights(self.pixels, self.numPixels, chasingLightsSettings["numLitPixels"], chasingLightsSettings["color"], chasingLightsSettings["speed"])
