@@ -67,7 +67,6 @@ def chasingLights(pixels, num_pixels, numLitPixels, color, speed):
         pixels.show()
         time.sleep(actualSleepInterval)
 
-
 brightnessSeeds = None
 def twinkle(pixels, num_pixels, speed, color):
     global brightnessSeeds
@@ -80,13 +79,19 @@ def twinkle(pixels, num_pixels, speed, color):
 
     numberOfSteps = minimumSteps + int((maximumSteps-minimumSteps)*speed)
     stepSize = 2.0*math.pi/numberOfSteps
+    start = time.time()
+    pixelTime = 0
     for i in range(numberOfSteps):
         actualBrightness = [brightnessEquation(brightness, stepSize, i) for brightness in brightnessSeeds]
         for j in range(num_pixels):
             scaledColor = animationHelpers.scaleBrightnessOfColor(color, actualBrightness[j])
             pixels[j] = scaledColor
+        pixelStart = time.time()
         pixels.show()
-    print("COMPLETED ANIMATION")
+        pixelTime = pixelTime + time.time() - pixelStart
+    end = time.time()
+    total = start-end
+    print("Pixel Percentage: ", pixelTime/total)
 
     #All lights start with some brightness between 0-1 randomly. They will all take a number of steps to go from 
     # 0.5 ->0.6 -> 0.7... 1.0 -> 0.9 -> ...0.1 -> 0.0 ->0.1 ... 0.5
