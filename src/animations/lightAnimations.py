@@ -67,13 +67,16 @@ def chasingLights(pixels, num_pixels, numLitPixels, color, speed):
         pixels.show()
         time.sleep(actualSleepInterval)
 
+
+brightnessSeeds = None
 def twinkle(pixels, num_pixels, speed, color):
     maxSleepInterval = 0.25
     actualSleepInterval = animationHelpers.getNormalizedSpeed(speed, maxSleepInterval)
     def brightnessEquation(brightness, stepSize, iterator):
         return (math.cos(brightness + stepSize*iterator) + 1)*0.5
+    if(brightnessSeeds == None):
+        brightnessSeeds = [random.random()*2*math.pi for i in range(num_pixels)]
 
-    brightnessSeeds = [random.random()*2*math.pi for i in range(num_pixels)]
     numberOfSteps = 50
     stepSize = 2.0*math.pi/numberOfSteps
     for i in range(numberOfSteps + 1):
