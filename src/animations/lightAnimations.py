@@ -74,18 +74,16 @@ def twinkle(pixels, num_pixels, speed, color):
         return (math.cos(brightness + stepSize*iterator) + 1)*0.5
 
     brightnessSeeds = [random.random()*2*math.pi for i in range(num_pixels)]
-    numberOfSteps = 50
+    numberOfSteps = 20
     stepSize = 2.0*math.pi/numberOfSteps
     for i in range(numberOfSteps + 1):
         actualBrightness = [brightnessEquation(brightness, stepSize, i) for brightness in brightnessSeeds]
         for j in range(num_pixels):
             scaledColor = animationHelpers.scaleBrightnessOfColor(color, actualBrightness[j])
-            print('j: ', j)
-            print('actualBrightness: ', actualBrightness)
-            print('scaledColor', scaledColor)
             pixels[j] = scaledColor
         pixels.show()
         time.sleep(actualSleepInterval)
+    print("COMPLETED ANIMATION")
 
     #All lights start with some brightness between 0-1 randomly. They will all take a number of steps to go from 
     # 0.5 ->0.6 -> 0.7... 1.0 -> 0.9 -> ...0.1 -> 0.0 ->0.1 ... 0.5
