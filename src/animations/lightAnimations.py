@@ -83,7 +83,6 @@ def twinkle(pixels, num_pixels, speed, color):
         actualBrightness = [brightnessEquation(brightness, stepSize, i) for brightness in brightnessSeeds]
         pixelsTuple = [animationHelpers.scaleBrightnessOfColor(color, x) for x in actualBrightness]
         pixels[:num_pixels] = pixelsTuple
-
         pixels.show()
 
     #All lights start with some brightness between 0-1 randomly. They will all take a number of steps to go from 
