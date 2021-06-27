@@ -82,6 +82,7 @@ def twinkle(pixels, num_pixels, speed, color):
             scaledColor = animationHelpers.scaleBrightnessOfColor(color, actualBrightness[j])
             print('j: ', j)
             print('actualBrightness: ', actualBrightness)
+            print('scaledColor', scaledColor)
             pixels[j] = scaledColor
         pixels.show()
         time.sleep(actualSleepInterval)
