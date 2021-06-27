@@ -70,7 +70,6 @@ def chasingLights(pixels, num_pixels, numLitPixels, color, speed):
 brightnessSeeds = None
 def twinkle(pixels, num_pixels, speed, color):
     global brightnessSeeds
-    start = time.time()
     minimumSteps = 5
     maximumSteps = 500
     def brightnessEquation(brightness, stepSize, iterator):
@@ -85,52 +84,11 @@ def twinkle(pixels, num_pixels, speed, color):
         pixelsTuple = [animationHelpers.scaleBrightnessOfColor(color, x) for x in actualBrightness]
         pixels[:num_pixels] = pixelsTuple
         pixels.show()
-    endTime = time.time()
-    total = endTime - start
-    print("TotalTime: ", total)
-
-
-brightnessLookup = None
-startingPoints = None
-def twinklePreCalc(pixels, num_pixels, speed, color):
-    global brightnessLookup
-    global startingPoints
-    start = time.time()
-    minimumSteps = 5
-    maximumSteps = 500
-    numberOfSteps = minimumSteps + int((maximumSteps-minimumSteps)*speed)
-
-    if(brightnessLookup == None):
-        print("Calculate all seeds")
-        brightnessLookup = [float(x)/numberOfSteps for x in range(numberOfSteps)]
-        startingPoints = [random.randint(0, numberOfSteps-1) for x in range(num_pixels)]
-
-    for stepIterator in range(numberOfSteps):
-        pixelsTuple=[]
-        for pixelIterator in range(num_pixels):
-            newSpot = startingPoints[pixelIterator] + stepIterator
-            if(newSpot >= numberOfSteps):
-                newSpot = newSpot - numberOfSteps
-            brightness = brightnessLookup[newSpot]
-            scaledColor = animationHelpers.scaleBrightnessOfColor(color, brightness)
-            pixelsTuple.append(scaledColor)
-        # pixels[:num_pixels] = pixelsTuple
-        # pixels.show()
-    endTime = time.time()
-    total = endTime-start
-    print("TotalTime: ", total)
-
-
     #All lights start with some brightness between 0-1 randomly. They will all take a number of steps to go from 
     # 0.5 ->0.6 -> 0.7... 1.0 -> 0.9 -> ...0.1 -> 0.0 ->0.1 ... 0.5
     # Can use a circle to create this looping of values. brightness = (cos(x) +1)*0.5. 
     # x values will be between 0 and 2pi. All pixels will need a starting value that will be iterated on by step size. 
     # step size will be 2pi/numberOfSteps. To progress add one step size to each of the pixels.
-
-    # create a lookup table for all brightness values for all number of steps. key is step number value is brightness {0: 0.0, 1: 0.14, 2: 0.28}. Brightness should increase from 0 to 1.
-    # Have all of the pixels randomly start somehwere in the 500 steps generated.
-    # iterate the 500 steps and increment the brightness value by 1 for each pixel.
-
 
 def error(pixels):
     pixels.fill((0, 255, 0))
