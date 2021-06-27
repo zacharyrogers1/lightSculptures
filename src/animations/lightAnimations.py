@@ -114,8 +114,8 @@ def twinklePreCalc(pixels, num_pixels, speed, color):
             brightness = brightnessLookup[newSpot]
             scaledColor = animationHelpers.scaleBrightnessOfColor(color, brightness)
             pixelsTuple.append(scaledColor)
-        pixels[:num_pixels] = pixelsTuple
-        pixels.show()
+        # pixels[:num_pixels] = pixelsTuple
+        # pixels.show()
     endTime = time.time()
     total = endTime-start
     print("TotalTime: ", total)
