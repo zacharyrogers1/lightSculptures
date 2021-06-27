@@ -85,12 +85,14 @@ def twinkle(pixels, num_pixels, speed, color):
         actualBrightness = [brightnessEquation(brightness, stepSize, i) for brightness in brightnessSeeds]
         for j in range(num_pixels):
             scaledColor = animationHelpers.scaleBrightnessOfColor(color, actualBrightness[j])
+            pixelStart = time.time()
             pixels[j] = scaledColor
+            pixelTime = pixelTime + time.time() - pixelStart
         pixelStart = time.time()
         pixels.show()
         pixelTime = pixelTime + time.time() - pixelStart
     end = time.time()
-    total = start-end
+    total = end-start
     print("Pixel Percentage: ", pixelTime/total)
 
     #All lights start with some brightness between 0-1 randomly. They will all take a number of steps to go from 
