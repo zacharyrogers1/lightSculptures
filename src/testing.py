@@ -1,6 +1,6 @@
 import board
 import neopixel
-from animations import lightAnimations
+from animations import lightAnimations, twoDAnimations
 
 pixel_pin = board.D18
 num_pixels = 50
@@ -8,7 +8,7 @@ ORDER = neopixel.RGB
 pixels = neopixel.NeoPixel(pixel_pin, num_pixels, auto_write=False, pixel_order=ORDER)
 pixels.brightness = 0.5
 while(True):
-    lightAnimations.twinkle(pixels, num_pixels, 1.0, (255,0,0))
+    twoDAnimations.scanningStripe(pixels, 10, 1.0, (255,0,0))
     # pixels[0:3] = [(255,0,0),(255,0,0),(255,0,0)]
     # pixels.show()
 

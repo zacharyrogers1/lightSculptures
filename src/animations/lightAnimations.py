@@ -13,7 +13,7 @@ def countdown(pixels, timeInSeconds):
         time.sleep(stepInterval)
 
 def pingPong(pixels, num_pixels, speed, color):
-    maxSleepInterval = 0.5
+    maxSleepInterval = 0.1
 
     actualSleepInterval = animationHelpers.getNormalizedSpeed(speed, maxSleepInterval)
     pixels.fill((0,0,0))
