@@ -4,7 +4,7 @@ from animations import animationHelpers
 
 
 def scanningStripe(pixels, xAxisLength, speed, color):
-    maxSleepInterval = 1
+    maxSleepInterval = 0.2
     normalizedSpeed = animationHelpers.getNormalizedSpeed(speed, maxSleepInterval)
 
     yAxisLength = int(pixels.n / xAxisLength)

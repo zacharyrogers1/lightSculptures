@@ -55,7 +55,7 @@ def chasingLights(pixels, numLitPixels, color, speed):
         else:
             return numLitPixels
 
-    maxSleepInterval = 0.3
+    maxSleepInterval = 0.15
     actualSleepInterval = animationHelpers.getNormalizedSpeed(speed,maxSleepInterval)
     pixels.fill((0,0,0))
     pixels.show()
