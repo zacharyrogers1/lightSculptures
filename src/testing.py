@@ -8,7 +8,7 @@ ORDER = neopixel.RGB
 pixels = neopixel.NeoPixel(pixel_pin, num_pixels, auto_write=False, pixel_order=ORDER)
 pixels.brightness = 0.5
 while(True):
-    lightAnimations.twinkle(pixels, num_pixels, 1.0, (255,0,0))
+    lightAnimations.twinklePreCalc(pixels, num_pixels, 1.0, (255,0,0))
     # pixels[0:3] = [(255,0,0),(255,0,0),(255,0,0)]
     # pixels.show()
 
