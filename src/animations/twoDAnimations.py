@@ -27,4 +27,5 @@ def movingRainbow(pixels, xAxisLength, speed):
             for y in range(yAxisLength):
                 screen[x][y] = animationHelpers.wheel(x*10 + y*10 + loops)
         animationHelpers.show2DimensionalDisplay(pixels, screen)
-        time.sleep(0.1)
+        print("screen finish")
+    print("-------------------------------")
