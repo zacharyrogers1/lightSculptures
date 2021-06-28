@@ -25,7 +25,7 @@ def movingRainbow(pixels, xAxisLength, speed):
     screen = animationHelpers.createBlankScreen(xAxisLength, yAxisLength)
     loopCount = 8000
     maxValue = xAxisLength + loopCount
-    scalingFactor = (2*math.pi())/maxValue
+    scalingFactor = (2*math.pi)/maxValue
     for loops in range(loopCount):
         for x in range(xAxisLength):
             for y in range(yAxisLength):
