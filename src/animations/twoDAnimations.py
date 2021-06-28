@@ -23,10 +23,12 @@ def scanningStripe(pixels, xAxisLength, speed, color):
 def movingRainbow(pixels, xAxisLength, speed):
     yAxisLength = int(pixels.n / xAxisLength)
     screen = animationHelpers.createBlankScreen(xAxisLength, yAxisLength)
-    for loops in range(200):
+    loopCount = 200
+    for loops in range(loopCount):
         for x in range(xAxisLength):
             for y in range(yAxisLength):
-                scaledValue = (math.cos((x + y + loops)*0.01) + 1)*255/2.0
+                scaledValue = (math.cos((5*x + loops) ) + 1)*255/2.0
+                # print(scaledValue)
                 screen[x][y] = animationHelpers.wheel(scaledValue)
         animationHelpers.show2DimensionalDisplay(pixels, screen)
         # time.sleep(0.1)
