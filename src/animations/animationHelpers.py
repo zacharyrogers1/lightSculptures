@@ -6,9 +6,10 @@ def getNormalizedSpeed(speed, maxSleepInterval):
     return speed * maxSleepInterval
 
 
-def wheel(pos):
+def wheel(incomingPos):
     # Input a value 0 to 255 to get a color value.
     # The colours are a transition r - g - b - back to r.
+    pos = int(incomingPos)
     if pos < 0 or pos > 255:
         return (0, 0, 0)
     if pos < 85:
