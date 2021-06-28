@@ -24,13 +24,12 @@ def movingRainbow(pixels, xAxisLength, speed):
     yAxisLength = int(pixels.n / xAxisLength)
     screen = animationHelpers.createBlankScreen(xAxisLength, yAxisLength)
     loopCount = 8000
-    maxValue = xAxisLength + loopCount
-    scalingFactor = (2*math.pi)/maxValue
+    # maxValue = xAxisLength + loopCount
+    # scalingFactor = (2*math.pi)/maxValue
     for loops in range(loopCount):
         for x in range(xAxisLength):
             for y in range(yAxisLength):
-                # ()*2*math.pi()
-                someNumber = scalingFactor * (x + loops)
+                someNumber = x + loops
                 scaledValue = (math.cos(someNumber) + 1)*255/2.0
                 screen[x][y] = animationHelpers.wheel(scaledValue)
             animationHelpers.show2DimensionalDisplay(pixels, screen)
