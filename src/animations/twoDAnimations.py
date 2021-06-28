@@ -1,4 +1,5 @@
 import time
+import math
 from animations import animationHelpers
 # from animations.animationHelpers import *
 
@@ -25,7 +26,8 @@ def movingRainbow(pixels, xAxisLength, speed):
     for loops in range(200):
         for x in range(xAxisLength):
             for y in range(yAxisLength):
-                screen[x][y] = animationHelpers.wheel(x*10 + y*10 + loops)
+                scaledValue = (math.cos(x*10 + y*10 + loops) + 1)*255
+                screen[x][y] = animationHelpers.wheel(scaledValue)
         animationHelpers.show2DimensionalDisplay(pixels, screen)
         print("screen finish")
     print("-------------------------------")
