@@ -1,49 +1,14 @@
-import multiprocessing
-import random
+import board
+import neopixel
 import time
-from threading import current_thread
+from animations import lightAnimations, twoDAnimations
 
-import rx
-from rx.scheduler import ThreadPoolScheduler
-from rx import operators as ops
-
-
-def intense_calculation(value):
-    # sleep for a random short duration between 0.5 to 2.0 seconds to simulate a long-running calculation
-    time.sleep(random.randint(5, 20) * 0.1)
-    return value
-
-
-# calculate number of CPUs, then create a ThreadPoolScheduler with that number of threads
-optimal_thread_count = multiprocessing.cpu_count()
-pool_scheduler = ThreadPoolScheduler(optimal_thread_count)
-
-# Create Process 1
-rx.of("Alpha", "Beta", "Gamma", "Delta", "Epsilon").pipe(
-    ops.map(lambda s: intense_calculation(s)), ops.subscribe_on(pool_scheduler)
-).subscribe(
-    on_next=lambda s: print("PROCESS 1: {0} {1}".format(current_thread().name, s)),
-    on_error=lambda e: print(e),
-    on_completed=lambda: print("PROCESS 1 done!"),
-)
-
-# Create Process 2
-rx.range(1, 10).pipe(
-    ops.map(lambda s: intense_calculation(s)), ops.subscribe_on(pool_scheduler)
-).subscribe(
-    on_next=lambda i: print("PROCESS 2: {0} {1}".format(current_thread().name, i)),
-    on_error=lambda e: print(e),
-    on_completed=lambda: print("PROCESS 2 done!"),
-)
-
-# Create Process 3, which is infinite
-rx.interval(1).pipe(
-    ops.map(lambda i: i * 100),
-    ops.observe_on(pool_scheduler),
-    ops.map(lambda s: intense_calculation(s)),
-).subscribe(
-    on_next=lambda i: print("PROCESS 3: {0} {1}".format(current_thread().name, i)),
-    on_error=lambda e: print(e),
-)
-
-input("Press any key to exit\n")
+pixel_pin = board.D18
+num_pixels = 400
+ORDER = neopixel.RGB
+pixels = neopixel.NeoPixel(pixel_pin, num_pixels, auto_write=False, pixel_order=ORDER)
+pixels.brightness = 0.3
+pixels.fill((0,255,0))
+pixels.show()
+while(True):
+    time.sleep(1)
