@@ -13,7 +13,7 @@ QoS_One = 1
 QoS_Two = 2
 
 class StringLightsThing:
-    numPixels = 400
+    num_pixels = 400
     xAxisLength = 20
     reportedState = {
         "activeAnimation": "error",
@@ -29,7 +29,7 @@ class StringLightsThing:
         pixel_pin = board.D18
         ORDER = neopixel.RGB
         self.pixels = neopixel.NeoPixel(
-            pixel_pin, num_pixels, auto_write=False, pixel_order=ORDER)
+            pixel_pin, self.num_pixels, auto_write=False, pixel_order=ORDER)
     
     def deviceStartup(self):
         self.awsInitialization()
@@ -59,7 +59,7 @@ class StringLightsThing:
             "state": {
                 "reported": {
                     "connected": True,
-                    "numPixels": self.numPixels,
+                    "numPixels": self.num_pixels,
                     "xAxisLength": self.xAxisLength
                 }
             }
