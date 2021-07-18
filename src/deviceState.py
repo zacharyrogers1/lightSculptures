@@ -14,7 +14,7 @@ QoS_Two = 2
 
 class StringLightsThing:
     numPixels = 400
-    xAxisLength = 10
+    xAxisLength = 20
     reportedState = {
         "activeAnimation": "error",
     }
@@ -27,7 +27,6 @@ class StringLightsThing:
     def __init__(self):
         self.desiredState = {}
         pixel_pin = board.D18
-        num_pixels = 400
         ORDER = neopixel.RGB
         self.pixels = neopixel.NeoPixel(
             pixel_pin, num_pixels, auto_write=False, pixel_order=ORDER)
