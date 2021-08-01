@@ -7,7 +7,7 @@ pixel_pin = board.D18
 num_pixels = 100
 ORDER = neopixel.RGB
 pixels = neopixel.NeoPixel(pixel_pin, num_pixels, auto_write=False, pixel_order=ORDER)
-pixels.brightness = 0.3
+pixels.brightness = 1.0
 average = 0
 flip = True
 try:
