@@ -8,21 +8,16 @@ num_pixels = 100
 ORDER = neopixel.RGB
 pixels = neopixel.NeoPixel(pixel_pin, num_pixels, auto_write=False, pixel_order=ORDER)
 pixels.brightness = 1.0
-average = 0
-flip = True
+count = 0.0
+start = time.time()
 try:
     while(True):
-        start = time.time()
-        if(flip):
-            pixels.fill((255,0,0))
-            pixels.show()
-        else:
-            pixels.fill((0,255,0))
-            pixels.show()
-        final = time.time()
-        timeElapsed = final-start
-        average = (average + timeElapsed)/2.0
-        flip = not flip
+        pixels.fill((255,0,0))
+        pixels.show()
+        count = count + 1.0
 except:
-    print("Average Time: ", average)
-    print("Number Of Pixels: ", num_pixels)
+    final = time.time()
+    timeElapsed = final-start
+    print("Total Time: ", timeElapsed)
+    print("Average Time: ", timeElapsed/count)
+    print("Additional time per pixel: ",  ((timeElapsed/count) - 5e-5)/num_pixels)
