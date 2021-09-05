@@ -97,6 +97,19 @@ def off(pixels):
     pixels.fill((0,0,0))
     pixels.show()
 
+def fillAndEmpty(pixels, speed, color):
+    maxSleepInterval = 0.05
+    actualSleepInterval = animationHelpers.getNormalizedSpeed(speed, maxSleepInterval)
+    off(pixels)
+    for i in range(pixels.n):
+        pixels[i] = color
+        pixels.show()
+        time.sleep(actualSleepInterval)
+    for i in range(pixels.n):
+        pixels[pixels.n-i] = (0,0,0)
+        pixels.show()
+        time.sleep(actualSleepInterval)
+
 def error(pixels):
     pixels.fill((0, 255, 0))
     pixels.show()
