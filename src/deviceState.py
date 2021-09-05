@@ -119,13 +119,16 @@ class StringLightsThing:
         elif(activeAnimation == 'scanningStripe'):
             scanningStripeSettings = self.reportedState["animations"]["scanningStripe"]
             twoDAnimations.scanningStripe(self.pixels, self.xAxisLength, scanningStripeSettings["speed"], scanningStripeSettings["color"])
+        elif(activeAnimation == 'fillAndEmpty'):
+            fillAndEmptySettings = self.reportedState["animations"]["fillAndEmpty"]
+            lightAnimations.fillAndEmpty(self.pixels, fillAndEmptySettings["speed"], fillAndEmptySettings["color"])
         elif(activeAnimation == 'chasingLights'):
             chasingLightsSettings = self.reportedState["animations"]["chasingLights"]
             lightAnimations.chasingLights(self.pixels, chasingLightsSettings["numLitPixels"], chasingLightsSettings["color"], chasingLightsSettings["speed"])
-        elif(activeAnimation == 'pixelPaint'):
-            pixelPaint.pixelPaint(self.pixels, self.xAxisLength, self.pixelPaintUpdateList)
         elif(activeAnimation == 'off'):
             lightAnimations.off(self.pixels)
+        elif(activeAnimation == 'pixelPaint'):
+            pixelPaint.pixelPaint(self.pixels, self.xAxisLength, self.pixelPaintUpdateList)
         else:
             print('NO ACTIVE ANIMATION FOUND FOR: ', activeAnimation)
 
