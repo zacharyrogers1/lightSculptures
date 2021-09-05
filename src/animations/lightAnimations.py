@@ -95,6 +95,7 @@ def twinkle(pixels, speed, color):
 
 def off(pixels):
     pixels.fill((0,0,0))
+    pixels.show()
 
 def error(pixels):
     pixels.fill((0, 255, 0))
