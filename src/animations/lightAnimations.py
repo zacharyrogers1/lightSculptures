@@ -106,7 +106,7 @@ def fillAndEmpty(pixels, speed, color):
         pixels.show()
         time.sleep(actualSleepInterval)
     for i in range(pixels.n):
-        pixels[pixels.n-i] = (0,0,0)
+        pixels[pixels.n-i-1] = (0,0,0)
         pixels.show()
         time.sleep(actualSleepInterval)
 
