@@ -93,6 +93,9 @@ def twinkle(pixels, speed, color):
     # x values will be between 0 and 2pi. All pixels will need a starting value that will be iterated on by step size. 
     # step size will be 2pi/numberOfSteps. To progress add one step size to each of the pixels.
 
+def off(pixels):
+    pixels.fill((0,0,0))
+
 def error(pixels):
     pixels.fill((0, 255, 0))
     pixels.show()

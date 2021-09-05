@@ -124,6 +124,8 @@ class StringLightsThing:
             lightAnimations.chasingLights(self.pixels, chasingLightsSettings["numLitPixels"], chasingLightsSettings["color"], chasingLightsSettings["speed"])
         elif(activeAnimation == 'pixelPaint'):
             pixelPaint.pixelPaint(self.pixels, self.xAxisLength, self.pixelPaintUpdateList)
+        elif(activeAnimation == 'off'):
+            lightAnimations.off(self.pixels)
         else:
             print('NO ACTIVE ANIMATION FOUND FOR: ', activeAnimation)
 
