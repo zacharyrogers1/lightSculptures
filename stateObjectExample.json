@@ -1,5 +1,6 @@
 {
-    "activeAnimation": "countdown",
+    "activeAnimation": "chasingLights",
+    "brightness": 0.5,
     "color": [255,0,0],
     "speed": 0.1,
     "animations": {
