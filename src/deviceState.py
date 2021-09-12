@@ -101,30 +101,24 @@ class StringLightsThing:
 
     def runActiveAnimation(self):
         activeAnimation = self.reportedState["activeAnimation"]
+        color = self.reportedState["color"]
+        speed = self.reportedState["speed"]
         self.pixels.brightness = self.reportedState["brightness"]
         if(activeAnimation == 'error'):
             lightAnimations.error(self.pixels)
-        elif(activeAnimation == 'countdown'):
-            countdownSettings = self.reportedState["animations"]["countdown"]
-            lightAnimations.countdown(self.pixels, countdownSettings["timeInSeconds"])
         elif(activeAnimation == 'pingPong'):
-            pingPongSettings = self.reportedState["animations"]["pingPong"]
-            lightAnimations.pingPong(self.pixels, pingPongSettings["speed"], pingPongSettings["color"])
+            lightAnimations.pingPong(self.pixels, speed, color)
         elif(activeAnimation == 'unifiedRainbow'):
-            unifiedRainbowSettings = self.reportedState["animations"]["unifiedRainbow"]
-            lightAnimations.unifiedRainbow(self.pixels, unifiedRainbowSettings["speed"])
+            lightAnimations.unifiedRainbow(self.pixels, speed)
         elif(activeAnimation == 'twinkle'):
-            twinkleSettings = self.reportedState["animations"]["twinkle"]
-            lightAnimations.twinkle(self.pixels, twinkleSettings["speed"], twinkleSettings["color"])
+            lightAnimations.twinkle(self.pixels, speed, color)
         elif(activeAnimation == 'scanningStripe'):
-            scanningStripeSettings = self.reportedState["animations"]["scanningStripe"]
-            twoDAnimations.scanningStripe(self.pixels, self.xAxisLength, scanningStripeSettings["speed"], scanningStripeSettings["color"])
+            twoDAnimations.scanningStripe(self.pixels, self.xAxisLength, speed, color)
         elif(activeAnimation == 'fillAndEmpty'):
-            fillAndEmptySettings = self.reportedState["animations"]["fillAndEmpty"]
-            lightAnimations.fillAndEmpty(self.pixels, fillAndEmptySettings["speed"], fillAndEmptySettings["color"])
+            lightAnimations.fillAndEmpty(self.pixels,speed, color)
         elif(activeAnimation == 'chasingLights'):
             chasingLightsSettings = self.reportedState["animations"]["chasingLights"]
-            lightAnimations.chasingLights(self.pixels, chasingLightsSettings["numLitPixels"], chasingLightsSettings["color"], chasingLightsSettings["speed"])
+            lightAnimations.chasingLights(self.pixels, chasingLightsSettings["numLitPixels"], color, speed)
         elif(activeAnimation == 'off'):
             lightAnimations.off(self.pixels)
         elif(activeAnimation == 'pixelPaint'):
