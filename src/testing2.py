@@ -9,5 +9,8 @@ ORDER = neopixel.RGB
 pixels = neopixel.NeoPixel(pixel_pin, num_pixels, auto_write=False, pixel_order=ORDER)
 pixels.brightness = 1.0
 while(True):
+    pixels.fill((255,0,0))
+    pixels.fill((0,255,0))
+    pixels.fill((0,0,255))
     pixels.fill((255,255,255))
     pixels.show()
