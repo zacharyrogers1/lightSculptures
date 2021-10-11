@@ -6,3 +6,11 @@ To see all running processes on UNIX
 
 To kill a processes. Find PID of process and enter in below command
     ~sudo kill 3374~
+
+
+Detach Process from ssh
+- ssh into raspberry pi
+- run ~tmux~ to open new session
+- start any open process ~sudo python main.py~
+- When ready to exit tmux when python process is actively running press "ctrl + b" then "d"
+- To log back into the session type tmux attach

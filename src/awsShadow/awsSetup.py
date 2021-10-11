@@ -31,6 +31,19 @@ def initialAwsSetup():
     myAWSIoTMQTTShadowClient.configureConnectDisconnectTimeout(10)
     myAWSIoTMQTTShadowClient.configureMQTTOperationTimeout(CONST_TIMEOUT)
 
+    # Last Will And Testament
+    lastWillTestamentTopic = f"lastWillTestament/{thingName}"
+    lastWillTestamentMessage = {
+        "state": {        
+            "reported": {
+                "connected": False,
+            }
+        }
+    }
+    lastWillTestamentMessageString = json.dumps(lastWillTestamentMessage)
+    myAWSIoTMQTTShadowClient.configureLastWill(
+        lastWillTestamentTopic, lastWillTestamentMessageString, QoS_Zero)
+
     # Connect to AWS IoT
     myAWSIoTMQTTShadowClient.connect()
 
