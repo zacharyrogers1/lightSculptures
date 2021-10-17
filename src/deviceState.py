@@ -119,6 +119,8 @@ class StringLightsThing:
         elif(activeAnimation == 'chasingLights'):
             chasingLightsSettings = self.reportedState["animations"]["chasingLights"]
             lightAnimations.chasingLights(self.pixels, chasingLightsSettings["numLitPixels"], color, speed)
+        elif(activeAnimation == 'static'):
+            lightAnimations.static(self.pixels, color)
         elif(activeAnimation == 'off'):
             lightAnimations.off(self.pixels)
         elif(activeAnimation == 'pixelPaint'):

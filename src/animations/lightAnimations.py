@@ -110,6 +110,11 @@ def fillAndEmpty(pixels, speed, color):
         pixels.show()
         time.sleep(actualSleepInterval)
 
+def static(pixels, color):
+    pixels.fill(color)
+    pixels.show()
+    time.sleep(0.1)
+
 def error(pixels):
     pixels.fill((0, 255, 0))
     pixels.show()
@@ -117,10 +122,4 @@ def error(pixels):
     pixels.fill((0, 0, 0))
     pixels.show()
     time.sleep(0.5)
-
-# Pass in observable to all of the animations
-#  1. Start of animation subscribe to observable.
-# 2. create value outside of observable
-# 3. When the observable fires set the value which was created outside
-#4. For most of the animations there is a for loop. At the start of this for loop see if the value has changed. If value has changed then return out of animation. (potentially create blank screen)
 
