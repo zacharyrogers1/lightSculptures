@@ -33,16 +33,34 @@ def circle(pixels, xAxisLength, speed, color):
     screen = animationHelpers.createBlankScreen(xAxisLength, yAxisLength)
     for x in range(xAxisLength):
         for y in range(yAxisLength):
-            # dist = calculateDist(x, y, centerX, centerY) + circleLoop
-            # scalingPercentage = (math.cos(dist*normalizedScalar) + 1)/2.0
-            # scaledColor = animationHelpers.scaleBrightnessOfColor(color, scalingPercentage)
-            # screen[x][y] = scaledColor
             dist = calculateDist(x, y, centerX, centerY) + circleLoop
-            scalingPercentage = (math.cos(dist*0.1) + 1)*255/2.0
-            scaledColor = animationHelpers.wheel(scalingPercentage)
+            scalingPercentage = (math.cos(dist*normalizedScalar) + 1)/2.0
+            scaledColor = animationHelpers.scaleBrightnessOfColor(color, scalingPercentage)
             screen[x][y] = scaledColor
     animationHelpers.show2DimensionalDisplay(pixels, screen)
     circleLoop = circleLoop + 1
+
+rainbowCircleLoop = 0
+def rainbowCircle(pixels, xAxisLength, speed):
+    global rainbowCircleLoop
+    minAnimScalar = 0.05
+    maxAnimScalar = 0.3
+    normalizedScalar = animationHelpers.scaleBetweenTwoValues(speed, minAnimScalar, maxAnimScalar)
+    def calculateDist(x, y, centerX, centerY):
+        return math.sqrt( abs(centerX-x)**2 + abs(centerY-y)**2)
+
+    yAxisLength = int(pixels.n / xAxisLength)
+    centerX = xAxisLength/2
+    centerY = yAxisLength/2
+    screen = animationHelpers.createBlankScreen(xAxisLength, yAxisLength)
+    for x in range(xAxisLength):
+        for y in range(yAxisLength):
+            dist = calculateDist(x, y, centerX, centerY) + rainbowCircleLoop
+            scalingPercentage = (math.cos(dist*normalizedScalar) + 1)*255/2.0
+            scaledColor = animationHelpers.wheel(scalingPercentage)
+            screen[x][y] = scaledColor
+    animationHelpers.show2DimensionalDisplay(pixels, screen)
+    rainbowCircleLoop = rainbowCircleLoop + 1
 
 movingRainbowLoop = 0
 def movingRainbow(pixels, xAxisLength, speed):
