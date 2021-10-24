@@ -19,6 +19,9 @@ def scanningStripe(pixels, xAxisLength, speed, color):
         screen = animationHelpers.createBlankScreen(xAxisLength, yAxisLength)
         time.sleep(normalizedSpeed)
 
+def circle():
+    print('hello')
+
 
 def movingRainbow(pixels, xAxisLength, speed):
     yAxisLength = int(pixels.n / xAxisLength)
