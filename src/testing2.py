@@ -9,5 +9,7 @@ ORDER = neopixel.RGB
 pixels = neopixel.NeoPixel(pixel_pin, num_pixels, auto_write=False, pixel_order=ORDER)
 pixels.brightness = 1.0
 redColor = [255,0,0]
-while(True):
-    twoDAnimations.movingRainbow(pixels, 20, 0)
+twoDAnimations.movingRainbow(pixels, 20, 0)
+
+# while(True):
+#     twoDAnimations.movingRainbow(pixels, 20, 0)
