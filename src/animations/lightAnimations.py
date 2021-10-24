@@ -48,18 +48,40 @@ def unifiedRainbow(pixels, speed):
         time.sleep(actualSleepInterval)
 
 def chasingLights(pixels, numLitPixels, color, speed):
-    print('hello')
     # Instead of thinking about an animation as going through all pixels we can think about how many rotations on a circle we want it to go through.
     # The circle represents one complete animation cycle. If we wanted it to run twice that would be 4pi, and half an animation would be 1pi.
     # Every division of the circle is a unique point in which the animation is displaying. For every step we must know how to set all 400 pixels.
     # Come up with a function that accepts a value between 0 and 2pi and is able to set the state of all pixels based on it.
     # We need to define a starting point for brightest pixel. It should start at pixel 0.
     # Given the pixel starting point is 0 and starting animation step is 0pi we should produce brightness 0:1, 399:0.75, 398:0.50, 397:0.25, 396: 0.
-    # To calculate brightspot based on step. 
+    # To calculate brightspot based on step. just add one to brightspot 
     # for loop of numLitPixels+1 
     # Brightness = numLitPixels - i/numLitPixels
     # if(brightSpot-1 <0): 
     #   position = brightSpot - 1 + numPixels
+
+    def getWrapAroundNumber(index, positionsBehindIndex, arraySize):
+        positionToIndex = index-positionsBehindIndex
+        if(positionToIndex < 0 ):
+            return positionToIndex+arraySize
+        elif(positionToIndex>=arraySize):
+            return positionToIndex - arraySize
+        else:
+            return positionToIndex
+
+
+    num_pixels = pixels.n
+    brightSpotPosition = 25
+    for animationStepNum in range(num_pixels):
+        for i in range(numLitPixels+1):
+            brightness = (numLitPixels - i)/numLitPixels
+            position = getWrapAroundNumber(brightSpotPosition, i, num_pixels)
+            scaledBrigtnessValue = animationHelpers.scaleBrightnessOfColor(color, brightness)
+            pixels[position] = scaledBrigtnessValue
+        pixels.show()
+        brightSpotPosition = brightSpotPosition + 1
+
+
 
 
     # def determineNumberTrailingPixels(currentPixel, numLitPixels):
