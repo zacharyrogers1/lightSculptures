@@ -116,7 +116,7 @@ class StringLightsThing:
             lightAnimations.fillAndEmpty(self.pixels,speed, color)
         elif(activeAnimation == 'chasingLights'):
             chasingLightsSettings = self.reportedState["animations"]["chasingLights"]
-            lightAnimations.chasingLights(self.pixels, chasingLightsSettings["numLitPixels"], color, speed)
+            lightAnimations.chasingLights(self.pixels, chasingLightsSettings["numLitPixels"], color, chasingLightsSettings["chaserCount"])
         elif(activeAnimation == 'static'):
             lightAnimations.static(self.pixels, color)
         elif(activeAnimation == 'off'):
