@@ -38,7 +38,7 @@ def circle(pixels, xAxisLength, speed, color):
             # scaledColor = animationHelpers.scaleBrightnessOfColor(color, scalingPercentage)
             # screen[x][y] = scaledColor
             dist = calculateDist(x, y, centerX, centerY) + circleLoop
-            scalingPercentage = (math.cos(dist*normalizedScalar) + 1)*255/2.0
+            scalingPercentage = (math.cos(dist*0.05) + 1)*255/2.0
             scaledColor = animationHelpers.wheel(scalingPercentage)
             screen[x][y] = scaledColor
     animationHelpers.show2DimensionalDisplay(pixels, screen)
