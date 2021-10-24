@@ -120,7 +120,11 @@ class StringLightsThing:
         elif(activeAnimation == 'static'):
             lightAnimations.static(self.pixels, color)
         elif(activeAnimation == 'movingRainbow'):
-            twoDAnimations.movingRainbow(self.pixels,self.xAxisLength, speed)
+            twoDAnimations.movingRainbow(self.pixels, self.xAxisLength, speed)
+        elif(activeAnimation == 'circle'):
+            twoDAnimations.circle(self.pixels, self.xAxisLength, speed, color)
+        elif(activeAnimation == 'rainbowCircle'):
+            twoDAnimations.rainbowCircle(self.pixels, self.xAxisLength, speed)
         elif(activeAnimation == 'off'):
             lightAnimations.off(self.pixels)
         elif(activeAnimation == 'pixelPaint'):
