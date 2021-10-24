@@ -20,21 +20,22 @@ def scanningStripe(pixels, xAxisLength, speed, color):
 
 circleLoop = 0
 def circle(pixels, xAxisLength, color):
+    global circleLoop
     def calculateDist(x, y, centerX, centerY):
         return math.sqrt( abs(centerX-x)**2 + abs(centerY-y)**2)
 
     yAxisLength = int(pixels.n / xAxisLength)
     centerX = xAxisLength/2
     centerY = yAxisLength/2
-    maxDistance = 10
     screen = animationHelpers.createBlankScreen(xAxisLength, yAxisLength)
     for x in range(xAxisLength):
         for y in range(yAxisLength):
-            dist = calculateDist(x, y, centerX, centerY)
+            dist = calculateDist(x, y, centerX, centerY) + circleLoop
             scalingPercentage = (math.cos(dist) + 1)/2.0
             scaledColor = animationHelpers.scaleBrightnessOfColor(color, scalingPercentage)
             screen[x][y] = scaledColor
     animationHelpers.show2DimensionalDisplay(pixels, screen)
+    circleLoop = circleLoop + 1
 
 movingRainbowLoop = 0
 def movingRainbow(pixels, xAxisLength, speed):
