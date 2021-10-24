@@ -19,8 +19,11 @@ def scanningStripe(pixels, xAxisLength, speed, color):
         time.sleep(normalizedSpeed)
 
 circleLoop = 0
-def circle(pixels, xAxisLength, color):
+def circle(pixels, xAxisLength, speed, color):
     global circleLoop
+    minAnimScalar = 0.2
+    maxAnimScalar = 2.0
+    normalizedScalar = animationHelpers.scaleBetweenTwoValues(speed, minAnimScalar, maxAnimScalar)
     def calculateDist(x, y, centerX, centerY):
         return math.sqrt( abs(centerX-x)**2 + abs(centerY-y)**2)
 
@@ -31,7 +34,7 @@ def circle(pixels, xAxisLength, color):
     for x in range(xAxisLength):
         for y in range(yAxisLength):
             dist = calculateDist(x, y, centerX, centerY) + circleLoop
-            scalingPercentage = (math.cos(dist*0.2) + 1)/2.0
+            scalingPercentage = (math.cos(dist*normalizedScalar) + 1)/2.0
             scaledColor = animationHelpers.scaleBrightnessOfColor(color, scalingPercentage)
             screen[x][y] = scaledColor
     animationHelpers.show2DimensionalDisplay(pixels, screen)

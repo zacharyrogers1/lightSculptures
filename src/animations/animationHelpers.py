@@ -5,6 +5,11 @@ def getNormalizedSpeed(speed, maxSleepInterval):
         return 0 
     return speed * maxSleepInterval
 
+def scaleBetweenTwoValues(value, min, max):
+    # This assumes incoming value is scaled between 0-1
+    return min + ((max-min) * value)
+
+
 
 def wheel(incomingPos):
     # Input a value 0 to 255 to get a color value.
