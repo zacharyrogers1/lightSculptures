@@ -1,6 +1,6 @@
 def getNormalizedSpeed(speed, maxSleepInterval):
     if(speed > 1.0):
-        return 1.0 * maxSleepInterval
+        return maxSleepInterval
     elif(speed <= 0):
         return 0 
     return speed * maxSleepInterval
