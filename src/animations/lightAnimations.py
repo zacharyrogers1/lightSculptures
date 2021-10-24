@@ -47,7 +47,7 @@ def unifiedRainbow(pixels, speed):
         pixels.show()
         time.sleep(actualSleepInterval)
 
-def chasingLights(pixels, numLitPixels, color, speed):
+def chasingLights(pixels, numLitPixels, color, chaserCount):
     def getWrapAroundNumber(index, positionsBehindIndex, arraySize):
         positionToIndex = index-positionsBehindIndex
         if(positionToIndex < 0 ):
@@ -58,7 +58,12 @@ def chasingLights(pixels, numLitPixels, color, speed):
             return positionToIndex
 
     num_pixels = pixels.n
-    brightSpotPositions = [25, 325, 150, 210]
+
+    brightSpotPositions = []
+    for i in range(chaserCount):
+        position = round((i/chaserCount)*num_pixels)
+        brightSpotPositions.append(position)
+
     for animationStepNum in range(num_pixels):
         for j in range(len(brightSpotPositions)):
             brightSpotPosition = brightSpotPositions[j]
