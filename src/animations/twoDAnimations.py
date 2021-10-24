@@ -39,4 +39,4 @@ def movingRainbow(pixels, xAxisLength, spread, speed):
             screen[x][y] = animationHelpers.wheel(scaledValue)
     animationHelpers.show2DimensionalDisplay(pixels, screen)
     loopCounter = loopCounter + 1
-    time.sleep(normalizedSpeed)
+    time.sleep(maxSleepInterval)
