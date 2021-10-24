@@ -30,12 +30,14 @@ def circle(pixels, xAxisLength, color):
     for x in range(xAxisLength):
         for y in range(yAxisLength):
             dist = calculateDist(x, y, centerX, centerY)
+            print('dist', dist)
             scalingPercentage = dist/maxDistance
             if(scalingPercentage>1):
                 scalingPercentage = 1
-            animationHelpers.scaleBrightnessOfColor(color, scalingPercentage)
-            screen[x][y] = color
-    pixels.show()
+            scaledColor = animationHelpers.scaleBrightnessOfColor(color, scalingPercentage)
+            print('scaled color: ',x,y, scaledColor)
+            screen[x][y] = scaledColor
+    animationHelpers.show2DimensionalDisplay(pixels, screen)
 
 loopCounter = 0
 def movingRainbow(pixels, xAxisLength, speed):
