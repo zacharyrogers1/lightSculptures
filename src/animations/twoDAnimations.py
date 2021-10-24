@@ -18,8 +18,24 @@ def scanningStripe(pixels, xAxisLength, speed, color):
         screen = animationHelpers.createBlankScreen(xAxisLength, yAxisLength)
         time.sleep(normalizedSpeed)
 
-def circle():
-    print('hello')
+def circle(pixels, xAxisLength, color):
+    def calculateDist(x, y, centerX, centerY):
+        return math.sqrt( abs(centerX-x)**2 + abs(centerY-y)**2)
+
+    yAxisLength = int(pixels.n / xAxisLength)
+    centerX = xAxisLength/2
+    centerY = yAxisLength/2
+    maxDistance = 10
+    screen = animationHelpers.createBlankScreen(xAxisLength, yAxisLength)
+    for x in range(xAxisLength):
+        for y in range(yAxisLength):
+            dist = calculateDist(x, y, centerX, centerY)
+            scalingPercentage = dist/maxDistance
+            if(scalingPercentage>1):
+                scalingPercentage = 1
+            animationHelpers.scaleBrightnessOfColor(color, scalingPercentage)
+            screen[x][y] = color
+    pixels.show()
 
 loopCounter = 0
 def movingRainbow(pixels, xAxisLength, speed):

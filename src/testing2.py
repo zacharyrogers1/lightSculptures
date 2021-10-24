@@ -10,7 +10,7 @@ pixels = neopixel.NeoPixel(pixel_pin, num_pixels, auto_write=False, pixel_order=
 pixels.brightness = 1.0
 redColor = [255,0,0]
 while(True):
-    twoDAnimations.movingRainbow(pixels, 20, 0.1)
+    twoDAnimations.circle(pixels, 20, redColor)
 
 # while(True):
 #     twoDAnimations.movingRainbow(pixels, 20, 0)
