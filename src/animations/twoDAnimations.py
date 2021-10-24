@@ -26,7 +26,7 @@ def circle():
 def movingRainbow(pixels, xAxisLength, speed):
     yAxisLength = int(pixels.n / xAxisLength)
     screen = animationHelpers.createBlankScreen(xAxisLength, yAxisLength)
-    loopCount = 5
+    loopCount = xAxisLength
     # maxValue = xAxisLength + loopCount
     # scalingFactor = (2*math.pi)/maxValue
     for loops in range(loopCount):
