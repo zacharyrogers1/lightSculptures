@@ -13,7 +13,7 @@ def countdown(pixels, timeInSeconds):
         time.sleep(stepInterval)
 
 def pingPong(pixels, speed, color):
-    maxSleepInterval = 0.1
+    maxSleepInterval = 0.02
 
     actualSleepInterval = animationHelpers.getNormalizedSpeed(speed, maxSleepInterval)
     pixels.fill((0,0,0))
@@ -37,7 +37,7 @@ def pingPong(pixels, speed, color):
         time.sleep(actualSleepInterval)
 
 def unifiedRainbow(pixels, speed):
-    maxSleepInterval = 0.25
+    maxSleepInterval = 0.05
 
     actualSleepInterval = animationHelpers.getNormalizedSpeed(speed, maxSleepInterval)
     
@@ -55,7 +55,7 @@ def chasingLights(pixels, numLitPixels, color, speed):
         else:
             return numLitPixels
 
-    maxSleepInterval = 0.08
+    maxSleepInterval = 0.02
     actualSleepInterval = animationHelpers.getNormalizedSpeed(speed,maxSleepInterval)
     pixels.fill((0,0,0))
     pixels.show()
@@ -73,7 +73,7 @@ brightnessSeeds = None
 def twinkle(pixels, speed, color):
     global brightnessSeeds
     minimumSteps = 5
-    maximumSteps = 500
+    maximumSteps = 200
     num_pixels = pixels.n
     def brightnessEquation(brightness, stepSize, iterator):
         return (math.cos(brightness + stepSize*iterator) + 1)*0.5
@@ -98,7 +98,7 @@ def off(pixels):
     pixels.show()
 
 def fillAndEmpty(pixels, speed, color):
-    maxSleepInterval = 0.05
+    maxSleepInterval = 0.015
     actualSleepInterval = animationHelpers.getNormalizedSpeed(speed, maxSleepInterval)
     off(pixels)
     for i in range(pixels.n):
