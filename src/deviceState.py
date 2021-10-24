@@ -46,7 +46,6 @@ class StringLightsThing:
         payload = message.payload.decode('UTF-8')
         pixelsToUpdate = json.loads(payload)["pixelPaint"]
         self.pixelPaintUpdateList.extend(pixelsToUpdate)
-        print("Update list: ", self.pixelPaintUpdateList)
     
     def awsInitialization(self):
         (deviceShadowHandler, myAWSIoTMQTTShadowClient, mqttConnection) = initialAwsSetup()
@@ -80,7 +79,6 @@ class StringLightsThing:
 
     def shadowDeltaHandler(self, payload, responseStatus, token):
         payloadDict = json.loads(payload)["state"]
-        print("The Delta issssss : ", payloadDict)
         self.updateReportedStateBasedOnDifferences(payloadDict)
     
     def updateReportedStateAfterSuccess(self):
@@ -126,7 +124,7 @@ class StringLightsThing:
         elif(activeAnimation == 'pixelPaint'):
             pixelPaint.pixelPaint(self.pixels, self.xAxisLength, self.pixelPaintUpdateList)
         else:
-            print('NO ACTIVE ANIMATION FOUND FOR: ', activeAnimation)
+            lightAnimations.error(self.pixels)
 
 
 singletonDevice = StringLightsThing()
