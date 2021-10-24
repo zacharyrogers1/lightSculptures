@@ -18,6 +18,7 @@ def scanningStripe(pixels, xAxisLength, speed, color):
         screen = animationHelpers.createBlankScreen(xAxisLength, yAxisLength)
         time.sleep(normalizedSpeed)
 
+circleLoop = 0
 def circle(pixels, xAxisLength, color):
     def calculateDist(x, y, centerX, centerY):
         return math.sqrt( abs(centerX-x)**2 + abs(centerY-y)**2)
@@ -30,18 +31,14 @@ def circle(pixels, xAxisLength, color):
     for x in range(xAxisLength):
         for y in range(yAxisLength):
             dist = calculateDist(x, y, centerX, centerY)
-            print('dist', dist)
-            scalingPercentage = dist/maxDistance
-            if(scalingPercentage>1):
-                scalingPercentage = 1
+            scalingPercentage = (math.cos(dist) + 1)/2.0
             scaledColor = animationHelpers.scaleBrightnessOfColor(color, scalingPercentage)
-            print('scaled color: ',x,y, scaledColor)
             screen[x][y] = scaledColor
     animationHelpers.show2DimensionalDisplay(pixels, screen)
 
-loopCounter = 0
+movingRainbowLoop = 0
 def movingRainbow(pixels, xAxisLength, speed):
-    global loopCounter
+    global movingRainbowLoop
     maxColorSpread = 0.5
     normalizedMult = animationHelpers.getNormalizedSpeed(
     speed, maxColorSpread)
@@ -51,8 +48,8 @@ def movingRainbow(pixels, xAxisLength, speed):
     multiplier = normalizedMult # The bigger the multiplier get the more stripes of rainbow you can see. The smaller, the less distinct. 0.5 max
     for x in range(xAxisLength):
         for y in range(yAxisLength):
-            someNumber = (x + loopCounter) * multiplier # + (y + loopCounter) * multiplier
+            someNumber = (x + movingRainbowLoop) * multiplier # + (y + loopCounter) * multiplier
             scaledValue = (math.cos(someNumber) + 1)*255/2.0
             screen[x][y] = animationHelpers.wheel(scaledValue)
     animationHelpers.show2DimensionalDisplay(pixels, screen)
-    loopCounter = loopCounter + 1
+    movingRainbowLoop = movingRainbowLoop + 1
