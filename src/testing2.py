@@ -10,4 +10,4 @@ pixels = neopixel.NeoPixel(pixel_pin, num_pixels, auto_write=False, pixel_order=
 pixels.brightness = 1.0
 redColor = [255,0,0]
 while(True):
-    lightAnimations.chasingLights(pixels, 50, redColor, 0.1)
+    lightAnimations.chasingLights(pixels, 20, redColor, 0.1)

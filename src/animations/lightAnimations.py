@@ -58,7 +58,7 @@ def chasingLights(pixels, numLitPixels, color, speed):
             return positionToIndex
 
     num_pixels = pixels.n
-    brightSpotPositions = [25, 325]
+    brightSpotPositions = [25, 325, 150, 210]
     for animationStepNum in range(num_pixels):
         for j in range(len(brightSpotPositions)):
             brightSpotPosition = brightSpotPositions[j]
