@@ -23,14 +23,14 @@ def circle():
     print('hello')
 
 loopCounter = 0
-def movingRainbow(pixels, xAxisLength, speed):
+def movingRainbow(pixels, xAxisLength, spread, speed):
     global loopCounter
     yAxisLength = int(pixels.n / xAxisLength)
     screen = animationHelpers.createBlankScreen(xAxisLength, yAxisLength)
-    multiplier = 0.1 # The bigger the multiplier get the more stripes of rainbow you can see. The smaller, the less distinct.
+    multiplier = 0.5 # The bigger the multiplier get the more stripes of rainbow you can see. The smaller, the less distinct.
     for x in range(xAxisLength):
         for y in range(yAxisLength):
-            someNumber = (x + loopCounter) * multiplier + (y + loopCounter) * multiplier
+            someNumber = (x + loopCounter) * multiplier # + (y + loopCounter) * multiplier
             scaledValue = (math.cos(someNumber) + 1)*255/2.0
             screen[x][y] = animationHelpers.wheel(scaledValue)
     animationHelpers.show2DimensionalDisplay(pixels, screen)
