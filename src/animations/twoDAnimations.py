@@ -33,9 +33,13 @@ def circle(pixels, xAxisLength, speed, color):
     screen = animationHelpers.createBlankScreen(xAxisLength, yAxisLength)
     for x in range(xAxisLength):
         for y in range(yAxisLength):
+            # dist = calculateDist(x, y, centerX, centerY) + circleLoop
+            # scalingPercentage = (math.cos(dist*normalizedScalar) + 1)/2.0
+            # scaledColor = animationHelpers.scaleBrightnessOfColor(color, scalingPercentage)
+            # screen[x][y] = scaledColor
             dist = calculateDist(x, y, centerX, centerY) + circleLoop
-            scalingPercentage = (math.cos(dist*normalizedScalar) + 1)/2.0
-            scaledColor = animationHelpers.scaleBrightnessOfColor(color, scalingPercentage)
+            scalingPercentage = (math.cos(dist*normalizedScalar) + 1)*255/2.0
+            scaledColor = animationHelpers.wheel(scalingPercentage)
             screen[x][y] = scaledColor
     animationHelpers.show2DimensionalDisplay(pixels, screen)
     circleLoop = circleLoop + 1
