@@ -35,4 +35,4 @@ def movingRainbow(pixels, xAxisLength, speed):
                 someNumber = (x + loops) * 0.2 # The bigger the multiplier get the more stripes of rainbow you can see. The smaller, the less distinct.
                 scaledValue = (math.cos(someNumber) + 1)*255/2.0
                 screen[x][y] = animationHelpers.wheel(scaledValue)
-            animationHelpers.show2DimensionalDisplay(pixels, screen)
+        animationHelpers.show2DimensionalDisplay(pixels, screen)
