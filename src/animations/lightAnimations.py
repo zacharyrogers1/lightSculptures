@@ -64,7 +64,7 @@ def chasingLights(pixels, numLitPixels, color, speed):
             brightSpotPosition = brightSpotPositions[j]
             for i in range(numLitPixels+1):
                 brightness = (numLitPixels - i)/numLitPixels
-                position = getWrapAroundNumber(brightSpot, i, num_pixels)
+                position = getWrapAroundNumber(brightSpotPosition, i, num_pixels)
                 scaledBrigtnessValue = animationHelpers.scaleBrightnessOfColor(color, brightness)
                 pixels[position] = scaledBrigtnessValue
             brightSpotPosition = brightSpotPosition + 1
