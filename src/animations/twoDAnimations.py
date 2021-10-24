@@ -23,12 +23,17 @@ def circle():
     print('hello')
 
 loopCounter = 0
-def movingRainbow(pixels, xAxisLength, spread, speed):
+def movingRainbow(pixels, xAxisLength, speed):
     global loopCounter
+    # minimum is 0.01 slowest
+    # maximum is 0.5 fastest
+    # maxColorSpread = 0.5
+    # normalizedSpeed = animationHelpers.getNormalizedSpeed(
+    # speed, maxColorSpread)
 
     yAxisLength = int(pixels.n / xAxisLength)
     screen = animationHelpers.createBlankScreen(xAxisLength, yAxisLength)
-    multiplier = 0.02 # The bigger the multiplier get the more stripes of rainbow you can see. The smaller, the less distinct. 0.5 max
+    multiplier = 0.5 # The bigger the multiplier get the more stripes of rainbow you can see. The smaller, the less distinct. 0.5 max
     for x in range(xAxisLength):
         for y in range(yAxisLength):
             someNumber = (x + loopCounter) * multiplier # + (y + loopCounter) * multiplier
