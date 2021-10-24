@@ -22,18 +22,19 @@ def scanningStripe(pixels, xAxisLength, speed, color):
 def circle():
     print('hello')
 
-
+loopCounter = 0
 def movingRainbow(pixels, xAxisLength, speed):
+    global loopCounter
     yAxisLength = int(pixels.n / xAxisLength)
     screen = animationHelpers.createBlankScreen(xAxisLength, yAxisLength)
-    loopCount = 10
+    multiplier = 0.5 # The bigger the multiplier get the more stripes of rainbow you can see. The smaller, the less distinct.
     # maxValue = xAxisLength + loopCount
     # scalingFactor = (2*math.pi)/maxValue
-    for loops in range(loopCount):
-        for x in range(xAxisLength):
-            for y in range(yAxisLength):
-                someNumber = (x + loops) * 0.5 # The bigger the multiplier get the more stripes of rainbow you can see. The smaller, the less distinct.
-                scaledValue = (math.cos(someNumber) + 1)*255/2.0
-                screen[x][y] = animationHelpers.wheel(scaledValue)
-        animationHelpers.show2DimensionalDisplay(pixels, screen)
-        time.sleep(1)
+    # for loops in range(loopCount):
+    for x in range(xAxisLength):
+        for y in range(yAxisLength):
+            someNumber = (x + loopCounter) * multiplier # The bigger the multiplier get the more stripes of rainbow you can see. The smaller, the less distinct.
+            scaledValue = (math.cos(someNumber) + 1)*255/2.0
+            screen[x][y] = animationHelpers.wheel(scaledValue)
+    animationHelpers.show2DimensionalDisplay(pixels, screen)
+    loopCounter = loopCounter + 1
