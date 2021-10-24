@@ -119,6 +119,8 @@ class StringLightsThing:
             lightAnimations.chasingLights(self.pixels, chasingLightsSettings["numLitPixels"], color, chasingLightsSettings["chaserCount"])
         elif(activeAnimation == 'static'):
             lightAnimations.static(self.pixels, color)
+        elif(activeAnimation == 'movingRainbow'):
+            twoDAnimations.movingRainbow(self.pixels,self.xAxisLength, speed)
         elif(activeAnimation == 'off'):
             lightAnimations.off(self.pixels)
         elif(activeAnimation == 'pixelPaint'):

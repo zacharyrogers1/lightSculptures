@@ -1,7 +1,6 @@
 import time
 import math
 from animations import animationHelpers
-# from animations.animationHelpers import *
 
 
 def scanningStripe(pixels, xAxisLength, speed, color):
@@ -39,4 +38,3 @@ def movingRainbow(pixels, xAxisLength, speed):
             screen[x][y] = animationHelpers.wheel(scaledValue)
     animationHelpers.show2DimensionalDisplay(pixels, screen)
     loopCounter = loopCounter + 1
-    # time.sleep(maxSleepInterval)
