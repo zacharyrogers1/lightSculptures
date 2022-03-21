@@ -116,9 +116,15 @@ class StringLightsThing:
             lightAnimations.fillAndEmpty(self.pixels,speed, color)
         elif(activeAnimation == 'chasingLights'):
             chasingLightsSettings = self.reportedState["animations"]["chasingLights"]
-            lightAnimations.chasingLights(self.pixels, chasingLightsSettings["numLitPixels"], color, speed)
+            lightAnimations.chasingLights(self.pixels, chasingLightsSettings["numLitPixels"], color, chasingLightsSettings["chaserCount"])
         elif(activeAnimation == 'static'):
             lightAnimations.static(self.pixels, color)
+        elif(activeAnimation == 'movingRainbow'):
+            twoDAnimations.movingRainbow(self.pixels, self.xAxisLength, speed)
+        elif(activeAnimation == 'circle'):
+            twoDAnimations.circle(self.pixels, self.xAxisLength, speed, color)
+        elif(activeAnimation == 'rainbowCircle'):
+            twoDAnimations.rainbowCircle(self.pixels, self.xAxisLength, speed)
         elif(activeAnimation == 'off'):
             lightAnimations.off(self.pixels)
         elif(activeAnimation == 'pixelPaint'):

@@ -1,9 +1,14 @@
 def getNormalizedSpeed(speed, maxSleepInterval):
     if(speed > 1.0):
-        return 1.0 * maxSleepInterval
-    elif(speed < 0):
+        return maxSleepInterval
+    elif(speed <= 0):
         return 0 
     return speed * maxSleepInterval
+
+def scaleBetweenTwoValues(value, min, max):
+    # This assumes incoming value is scaled between 0-1
+    return min + ((max-min) * value)
+
 
 
 def wheel(incomingPos):
