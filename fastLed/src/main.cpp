@@ -5,17 +5,19 @@
 #define DATA_PIN 10
 CRGB leds[NUM_LEDS];
 
+uint8_t hue = 0;
+
 void setup()
 {
   Serial.begin(9600);
-  FastLED.addLeds<WS2811, DATA_PIN, RGB>(leds, NUM_LEDS);
-  FastLED.setBrightness(50);
+  FastLED.addLeds<WS2811Controller800Khz, DATA_PIN, RGB>(leds, NUM_LEDS);
+  FastLED.setBrightness(128);
+  FastLED.setCorrection(TypicalPixelString); // After some experimenting TypicalPixelString matches the white color correction best
+
 }
 
 void loop()
 {
-  // leds[0] = CRGB::Red;
-  leds[1] = CRGB::Green;
-  // leds[2] = CRGB::Blue;
+  fill_solid(leds, NUM_LEDS, CRGB::White);
   FastLED.show();
 }

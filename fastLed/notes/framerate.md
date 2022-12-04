@@ -1,0 +1,2 @@
+When testing the speed of FastLED with Arduino the net can achieve a framerate ~73FPS.
+Used the millis function to get a start and stop time and calculated the time it took to write the entire 400 pixel net with a new color.
