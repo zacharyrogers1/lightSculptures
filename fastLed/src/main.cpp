@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include <FastLED.h>
 #include "animations.h"
+#include "matrixLights.h"
 
 #define NUM_LEDS 400
 #define DATA_PIN 10
@@ -9,8 +10,7 @@
 #define COLOR_CORRECTION TypicalPixelString
 
 CRGB leds[NUM_LEDS];
-
-uint8_t hue = 0;
+MatrixLights myLights = MatrixLights(20, 20, leds);
 
 void setup()
 {
@@ -18,14 +18,13 @@ void setup()
   FastLED.addLeds<CHIPSET, DATA_PIN, RGB>(leds, NUM_LEDS);
   FastLED.setBrightness(BRIGHTNESS);
   FastLED.setCorrection(COLOR_CORRECTION); // After some experimenting TypicalPixelString matches the white color correction best
+
 }
 
 
 
 void loop()
 {
-  // fill_black(leds, NUM_LEDS);
-  rainbow_march_zach(20, 200, leds, NUM_LEDS);
-  // fill_solid(leds, NUM_LEDS, CRGB::Red);
-  FastLED.show();
+  myLights.setColor(CRGB::Blue);
+  myLights.setColor(CRGB::Red);
 }
