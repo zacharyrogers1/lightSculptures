@@ -1,6 +1,6 @@
 #include <Arduino.h>
 #include <FastLED.h>
-#include <animations.h>
+#include "animations.h"
 
 #define NUM_LEDS 400
 #define DATA_PIN 10
@@ -24,6 +24,8 @@ void setup()
 
 void loop()
 {
-  rainbow_march(100, 10, leds, 400);
+  // fill_black(leds, NUM_LEDS);
+  rainbow_march_zach(20, 200, leds, NUM_LEDS);
+  // fill_solid(leds, NUM_LEDS, CRGB::Red);
   FastLED.show();
 }

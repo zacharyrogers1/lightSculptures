@@ -1,8 +1,7 @@
 #include <Arduino.h>
 #include <FastLED.h>
 
-
-void rainbow_march(uint8_t thisdelay, uint8_t deltahue, CRGB *leds, int NUM_LEDS)
+void rainbow_march_zach(uint8_t thisdelay, uint8_t deltahue,struct CRGB *leds, int NUM_LEDS)
 { // The fill_rainbow call doesn't support brightness levels.
 
   uint8_t thishue = millis() * (255 - thisdelay) / 255; // To change the rate, add a beat or something to the result. 'thisdelay' must be a fixed value.
@@ -12,4 +11,9 @@ void rainbow_march(uint8_t thisdelay, uint8_t deltahue, CRGB *leds, int NUM_LEDS
 
   fill_rainbow(leds, NUM_LEDS, thishue, deltahue); // Use FastLED's fill_rainbow routine.
   // fill_solid()
+}
+
+void fill_black(struct CRGB *leds, int numToFill)
+{
+  fill_solid(leds, numToFill, CRGB::Black);
 }
