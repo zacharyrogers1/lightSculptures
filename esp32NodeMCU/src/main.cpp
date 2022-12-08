@@ -1,4 +1,5 @@
 #include <WiFiClientSecure.h>
+#include <FastLED.h>
 #include <MQTTClient.h>
 #include <ArduinoJson.h>
 #include "secrets.h"
@@ -15,6 +16,11 @@ char sndPayloadOn[512];
 
 WiFiClientSecure net = WiFiClientSecure();
 MQTTClient client = MQTTClient(256);
+
+void messageHandler(String &topic, String &payload) {
+  msgReceived = 1;
+  rcvdPayload = payload;
+}
 
 void connectAWS()
 {
@@ -58,10 +64,6 @@ void connectAWS()
   Serial.println("AWS IoT Connected!");
 }
 
-void messageHandler(String &topic, String &payload) {
-  msgReceived = 1;
-  rcvdPayload = payload;
-}
 
 void setup() {
   Serial.begin(9600);
