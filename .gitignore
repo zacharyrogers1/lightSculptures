@@ -9,3 +9,4 @@ settings.json
 .ropeproject
 
 .DS_Store
+secrets.h
