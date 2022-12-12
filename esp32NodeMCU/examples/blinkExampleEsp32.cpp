@@ -14,7 +14,7 @@ void setup()
 {
   pinMode(ONBOARD_LED, OUTPUT);
   pinMode(DATA_PIN, OUTPUT);
-  Serial.begin(9600);
+  Serial.begin(115200);
   FastLED.addLeds<CHIPSET, DATA_PIN, RGB>(leds, NUM_LEDS);
   FastLED.setBrightness(BRIGHTNESS);
   FastLED.setCorrection(COLOR_CORRECTION); // After some experimenting TypicalPixelString matches the white color correction best
